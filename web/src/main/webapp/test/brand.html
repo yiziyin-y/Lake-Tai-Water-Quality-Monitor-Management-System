@@ -1,0 +1,383 @@
+<div id="brandShow" style="width: inherit" xmlns:v-on="http://java.sun.com/jsf/composite"
+     xmlns:v-bind="http://java.sun.com/jsf/core" xmlns:v-on="http://java.sun.com/jsf/facelets"
+     xmlns:v-on="http://java.sun.com/jsf/html" xmlns:v-on="http://xmlns.jcp.org/jsf/core"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/composite" xmlns:v-bind="http://xmlns.jcp.org/jsf/html"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+    <div id = "searchGroups" class="c-body">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索条件</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="searchGroupsName" class="col-md-4 control-label">品牌</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control  c-square c-theme" id="searchGroupsName"  v-model="searchByName">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12" style="text-align: right; width: 70%">
+                <h6>&nbsp;</h6>
+                <button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="getAllBrands()"><i class="fa fa-search"></i>搜索</button>
+                <h6>&nbsp;</h6>
+                <button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toAddBrandPage()"><i class="fa fa-plus"></i>新增</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索结果</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="c-body">
+        <ul>
+            <div id = "groupShow" class="c-content">
+                <div class="c-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                <td  style="text-align: left">品牌名称</td>
+                                <td  style="text-align: left">备注</td>
+                                <td  style='text-align: left;' colspan="2">操作</td>
+                                </thead>
+                                <tbody >
+                                <tr v-for="(brand,index) in brands.listShare"  v-bind:id='brands.listShare.id'>
+                                    <td>{{brand.brandName}}</td>
+                                    <td>{{brand.remark}}</td>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toEditBrandPage(brand)" ><i class="fa fa-pencil"></i> 编辑</button>
+                                        &nbsp;
+                                        <button type="button"  class="btn btn-danger c-btn-square" v-on:click="delectBrand(brand)" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+
+</div>
+<!--表格结束-->
+<!--新增一个酒店集团 开始-->
+<div id = "addBrand" hidden="true">
+    <div class="modal-header" style="border: 0px">
+
+        <a href="javascript:;" v-on:click="tobrandShow()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">新增</div>
+        </a>
+
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="addForm">
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">品牌:&nbsp;</label>
+                <div class="col-md-3">
+                    <input type="text"  maxlength="50" v-model="addBrand.brandName" class="form-control  c-square c-theme"  >
+                    <span style="color: red">{{checkName}}</span>
+                </div>
+            </div>
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">备注:&nbsp;</label>
+                <div class="col-md-6">
+                    <textarea   class="form-control  c-square c-theme" v-model="addBrand.remark" />
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div  class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click="sureAddBrand()" >保&nbsp;&nbsp;存
+        </button>
+        <button type="button"  class="btn btn-primary" v-on:click="tobrandShow()">关&nbsp;&nbsp;闭
+        </button>
+
+    </div>
+
+</div>
+<!--新增一个酒店集团  结束-->
+<div id="editBrand" hidden="true">
+    <div class="modal-header" style="border: 0px">
+
+        <a href="javascript:;" v-on:click="toBrandPage()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">编辑</div>
+
+        </a>
+
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="editForm">
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">品牌:&nbsp;</label>
+                <div class="col-md-3">
+                    <input type="text"   maxlength="50" v-model="brandList.brandName" class="form-control  c-square c-theme"  >
+                    <span style="color: red">{{checkIsNull}}</span>
+                </div>
+            </div>
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">品牌:&nbsp;</label>
+                <div class="col-md-6">
+                    <textarea class="form-control  c-square c-theme"   v-model="brandList.remark" />
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div  class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click="sureEditBrand()" >保&nbsp;&nbsp;存
+        </button>
+        <button type="button"  class="btn btn-primary" v-on:click="toBrandPage()">关&nbsp;&nbsp;闭
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<div id="bar" ></div>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="assets/heos/default/js/pageBar.js"></script>
+
+<script>
+    //分页信息
+    var id = 0;
+    var IsEditImg = true;
+    var store = {
+        debug: true,
+        state: {
+            //获取的所有记录
+            listShare: [],
+
+        },
+
+        setMessageAction (newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue)
+            this.state.consultantlistShare = newValue
+        },
+        clearMessageAction () {
+            if (this.debug) console.log('clearMessageAction triggered')
+            this.state.consultantlistShare = ''
+        }
+    }
+
+    //网站校验
+    function IsURL(urlString)
+    {
+        var regExp = /^((https?|ftp|news):\/\/)?([a-z]([a-z0-9\-]*[\.。])+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel)|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&]*)?)?(#[a-z][a-z0-9_]*)?$/
+
+        if (urlString.match(regExp))
+
+            return true;
+        else
+
+            return false;
+    }
+    //供应商类别
+    var brandShow = new Vue({
+        el:"#brandShow",
+        data:{
+            brands:store.state,
+            brandList:"",
+            searchByName:""
+
+        },
+        created : function(){
+            var data = {};
+            data.brandName =""
+
+            //url查询
+            var url = "brand/getAllBrands";
+            //查询条件
+            //派出pageIndex oageSize
+            //传条件
+            postPageInfo(data,url);
+            initPageBar();
+
+        },
+        methods:{
+            getAllBrands:function () {
+                var data = {};
+                data.brandName =brandShow.searchByName;
+                //url查询
+                var url = "brand/getAllBrands";
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                postPageInfo(data,url);
+                initPageBar();
+
+            },
+            delectBrand:function(brand){
+                if(!confirm("确定删除？")){
+                    return;
+                }
+                var data = {};
+                data.id =  brand.id;
+
+                $.ajax({
+                    type: "POST",
+                    url: "brand/delectBrand",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        alert("success");
+                        // 需要重新再次查询数据库
+                        brandShow.getAllBrands();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            },
+            toAddBrandPage:function(){
+                $("#addBrand").show();
+                $("#brandShow").hide();
+                $("#bar").hide();
+
+
+            },
+            toEditBrandPage:function (brand) {
+                editBrand.brandList = brand;
+                $("#brandShow").hide();
+                $("#editBrand").show();
+                $("#bar").hide();
+            }
+
+
+
+
+        }
+    });
+
+    //添加一个供应商类别
+    var addBrand = new Vue({
+        el:"#addBrand",
+        data:{
+            addBrand:[],
+            checkName:"",
+
+
+
+        },
+        methods:{
+
+            tobrandShow:function(){
+                $("#addBrand").hide();
+                $("#brandShow").show();
+                $("#bar").show();
+               brandShow.getAllBrands();
+                addBrand.addBrand.brandName =null;
+                addBrand.addBrand.remark = null;
+
+            },
+            sureAddBrand:function(){
+                if(this.addBrand.brandName == null){
+                    this.checkName="品牌名称不能为空";
+                    return ;
+                }
+                var data={};
+                data.brandName = this.addBrand.brandName;
+                data.remark =this.addBrand.remark;
+                $.ajax({
+                    type: "POST",
+                    url: "brand/addBrand",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 1){
+                            alert("success")
+                           brandShow.getAllBrands();
+                            addBrand.addBrand.brandName =null;
+                            addBrand.addBrand.remark = null;
+                        }else{
+                            alert(result.message);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    },
+
+                });
+                $("#addBrand").hide();
+                $("#brandShow").show();
+                $("#bar").show();
+
+
+            },
+
+        }
+    });
+
+    var editBrand = new Vue({
+        el:"#editBrand",
+        data:{
+
+            brandList:[],
+            checkIsNull:"",
+
+        },
+        methods: {
+            toBrandPage: function () {
+                $("#brandShow").show();
+                $("#bar").show();
+                $("#editBrand").hide();
+
+            },
+            sureEditBrand:function () {
+                if (this.brandList.brandName ==null){
+                    this.checkIsNull = "品牌名不能为空";
+                    return null;
+                }
+                var data = {};
+                data.brandName = editBrand.brandList.brandName;
+                data.id = editBrand.brandList.id;
+                data.remark = editBrand.brandList.remark;
+
+                $.ajax({
+                    type: "POST",
+                    url: "brand/editBrand",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 1){
+                            alert("success")
+                           brandShow.getAllBrands();
+                        }else{
+                            alert(result.message);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#brandShow").show();
+                $("#bar").show();
+                $("#editBrand").hide();
+
+            }
+
+
+
+        },
+
+    });
+
+</script>
+

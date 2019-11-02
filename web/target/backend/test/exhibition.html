@@ -1,0 +1,363 @@
+<div id="exhibitionShow" style="width: inherit" xmlns:v-on="http://java.sun.com/jsf/composite"
+     xmlns:v-bind="http://java.sun.com/jsf/core" xmlns:v-on="http://java.sun.com/jsf/facelets"
+     xmlns:v-on="http://java.sun.com/jsf/html" xmlns:v-on="http://xmlns.jcp.org/jsf/core"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/composite" xmlns:v-bind="http://xmlns.jcp.org/jsf/html"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+    <div id = "searchExhibition" class="c-body">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索条件</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="searchExhibitionName" class="col-md-4 control-label">网上展馆</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control  c-square c-theme" id="searchExhibitionName"  v-model="searchByName">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12" style="text-align: right; width: 70%">
+                <h6>&nbsp;</h6>
+                <button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="getAllExhibitions()"><i class="fa fa-search"></i> 搜索</button>
+                <h6>&nbsp;</h6>
+                <button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toAddExhibitionPage()"><i class="fa fa-plus"></i>新增</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索结果</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="c-body">
+        <ul>
+            <div id = "groupShow" class="c-content">
+                <div class="c-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                <td  style="text-align: left">网上展馆名称</td>
+                                <td  style="text-align: left">创建时间</td>
+                                <td  style='text-align: left;' colspan="2">操作</td>
+                                </thead>
+                                <tbody >
+                                <tr v-for="(exhibition,index) in Exhibitions.listShare"  v-bind:id='Exhibitions.listShare.id'>
+                                    <td>{{exhibition.name}}</td>
+                                    <td>{{exhibition.creationDate}}</td>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toEditExhibitionPage(exhibition)" ><i class="fa fa-pencil"></i> 编辑</button>
+                                        &nbsp;
+                                        <button type="button"  class="btn btn-danger c-btn-square" v-on:click="delectExhibition(exhibition)" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+
+</div>
+<!--表格结束-->
+<!--新增一个酒店集团 开始-->
+<div id = "addExhibition" hidden="true">
+    <div class="modal-header" style="border: 0px">
+
+        <a href="javascript:;" v-on:click="toExhibitionShow()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">新增</div>
+
+        </a>
+
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="addForm">
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">网上展馆:&nbsp;</label>
+                <div class="col-md-6">
+                    <input type="text"  maxlength="50" v-model="addExhibition.name" class="form-control  c-square c-theme"  >
+                    <span style="color: red">{{checkName}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div  class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click="sureAddExhibition()" >添&nbsp;&nbsp;加
+        </button>
+        <button type="button"  class="btn btn-primary" v-on:click="toExhibitionShow()">关&nbsp;&nbsp;闭
+        </button>
+
+    </div>
+
+</div>
+<!--新增一个酒店集团  结束-->
+<div id="editExhibition" hidden="true">
+    <div class="modal-header" style="border: 0px">
+
+        <a href="javascript:;" v-on:click="toExhibitionShowPage()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">编辑</div>
+
+        </a>
+
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="editForm">
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">网上展馆:&nbsp;</label>
+                <div class="col-md-6">
+                    <input type="text"   maxlength="50" v-model="editExhibition.name" class="form-control  c-square c-theme"  >
+                    <span style="color: red">{{checkIsNull}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div  class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click="sureEditExhibition()" >保&nbsp;&nbsp;存
+        </button>
+        <button type="button"  class="btn btn-primary" v-on:click="toExhibitionShowPage()">关&nbsp;&nbsp;闭
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<div id="bar" ></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="assets/heos/default/js/pageBar.js"></script>
+
+<script>
+    //分页信息
+
+    var store = {
+        debug: true,
+        state: {
+            //获取的所有记录
+            listShare: [],
+
+        },
+
+        setMessageAction (newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue)
+            this.state.consultantlistShare = newValue
+        },
+        clearMessageAction () {
+            if (this.debug) console.log('clearMessageAction triggered')
+            this.state.consultantlistShare = ''
+        }
+    }
+
+    //网站校验
+    function IsURL(urlString)
+    {
+        var regExp = /^((https?|ftp|news):\/\/)?([a-z]([a-z0-9\-]*[\.。])+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel)|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&]*)?)?(#[a-z][a-z0-9_]*)?$/
+
+        if (urlString.match(regExp))
+
+            return true;
+        else
+
+            return false;
+    }
+    //供应商类别
+    var exhibitionShow = new Vue({
+        el:"#exhibitionShow",
+        data:{
+            Exhibitions:store.state,
+            groupList:"",
+            searchByName:""
+
+        },
+        created : function(){
+            var data = {};
+
+            //url查询
+            var url = "exhibition/getAllExhibitions";
+            //查询条件
+            //派出pageIndex oageSize
+            //传条件
+            postPageInfo(data,url);
+            initPageBar();
+
+        },
+        methods:{
+            getAllExhibitions:function () {
+                var data = {};
+                data.name =exhibiShow.searchByName;
+                //url查询
+                var url = "exhibition/getAllExhibitions";
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                postPageInfo(data,url);
+                initPageBar();
+
+            },
+            delectExhibition:function(exhibition){
+                if(!confirm("确定删除？")){
+                    return;
+                }
+                var data = {};
+                data.id =  exhibition.id;
+
+                $.ajax({
+                    type: "POST",
+                    url: "exhibition/delectExhibiton",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        alert("success");
+                        // 需要重新再次查询数据库
+                        exhibiShow.getAllGroups();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            },
+            toAddOneGroupPage:function(){
+                $("#addOneGroup").show();
+                $("#groupsShow").hide();
+                $("#bar").hide();
+
+
+            },
+            toEditOneGroupPage:function (group) {
+                editOneGroup.editList = group;
+                $("#groupsShow").hide();
+                $("#editOneGroup").show();
+                $("#bar").hide();
+            }
+
+
+
+
+        }
+    });
+
+    //添加一个供应商类别
+    var addOneGroup = new Vue({
+        el:"#addOneGroup",
+        data:{
+            addGroup:[],
+            checkName:"",
+
+
+
+        },
+        methods:{
+
+            togroupsShow:function(){
+                $("#addOneGroup").hide();
+                $("#groupsShow").show();
+                $("#bar").show();
+                groupsShow.getAllGroups();
+
+            },
+            sureAddGroup:function(){
+                if(this.addGroup.groupName == null){
+                    this.checkName="集团名称不能为空";
+                    return ;
+                }
+                var data={};
+                data.groupName = this.addGroup.groupName;
+                $.ajax({
+                    type: "POST",
+                    url: "groups/addGroups",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 1){
+                            alert("success")
+                            groupsShow.getAllGroups();
+                        }else{
+                            alert(result.message);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#addOneGroup").hide();
+                $("#groupsShow").show();
+                $("#bar").show();
+
+
+            },
+
+        }
+    });
+
+    var editOneGroup = new Vue({
+        el:"#editOneGroup",
+        data:{
+            editGroup:[],
+            editList:[],
+            checkIsNull:"",
+            adImg:"",
+        },
+        methods: {
+            toGroupsPage: function () {
+                $("#groupsShow").show();
+                $("#bar").show();
+                $("#editOneGroup").hide();
+
+            },
+            sureEditGroup:function () {
+                if (this.editList.groupName ==null){
+                    this.checkIsNull = "集团名不能为空";
+                    return null;
+                }
+                var data = {};
+                data.groupName = editOneGroup.editList.groupName;
+                data.id = editOneGroup.editList.id;
+                alert(data.groupName)
+                $.ajax({
+                    type: "POST",
+                    url: "groups/editGroups",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 1){
+                            alert("success")
+                            groupsShow.getAllGroups();
+                        }else{
+                            alert(result.message);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#groupsShow").show();
+                $("#bar").show();
+                $("#editOneGroup").hide();
+
+            }
+
+
+
+        },
+
+    });
+
+</script>
+

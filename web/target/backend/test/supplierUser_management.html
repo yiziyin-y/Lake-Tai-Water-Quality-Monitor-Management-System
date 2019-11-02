@@ -1,0 +1,389 @@
+<div id="supplierUserShow"  style="width: inherit" >
+    <div id = "goodOperation" class="c-body" style="border:0px">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索条件</h4>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="hotelname" class="col-md-4 control-label">联系人：</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control c-square c-theme" id="hotelname" v-model=" supplierList.username"  >
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="hotelDept" class="col-md-4 control-label">电话：</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control c-square c-theme" id="hotelDept" v-model=" supplierList.phone"  >
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <label for="reviewStatus" class="col-md-4 control-label">审核状态：</label>
+                <div class="col-md-5">
+                <select id="reviewStatus" v-model="supplierList.auditStatus" style="width: 118.34px;" >
+                    <option selected = "selected" value="-1">--方案--</option>
+                    <option value="2">--审核成功--</option>
+                    <option value="3" >--审核失败--</option>
+                    <option value="1">--待审核--</option>
+
+
+                </select>
+                </div>
+            </div>
+
+            <div class="col-md-12" style="text-align: right; width: 70%">
+                <h6>&nbsp;</h6>
+                <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="getAllSupplierUsers()" ><i class="fa fa-search"></i> 查询</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="c-body" style="border: 0px">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索结果</h4>
+                </div>
+            </div>
+        </div>
+        <ul>
+            <div  class="c-content">
+                <div class="c-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                <td  style="text-align: left">供应商编号</td>
+                                <td  style="text-align: left">联系人</td>
+                                <td  style="text-align: left">电话</td>
+                                <td  style="text-align: left">审核状态</td>
+
+
+                                <td  style='text-align: left;' colspan="2">操作</td>
+                                </thead>
+                                <tbody >
+                                <tr v-for="(supplier,index) in  supplierUserList.listShare"  v-bind:id='supplierUserList.listShare.id' >
+                                    <td>{{supplier.supplierId}}</td>
+                                    <td>{{supplier.username}}</td>
+                                    <td>{{supplier.phone}}</td>
+                                    <td v-if="supplier.auditStatus ==1">未审核</td>
+                                    <td v-if="supplier.auditStatus ==2">审核成功</td>
+                                    <td v-if="supplier.auditStatus ==3">审核失败</td>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toReviewSupplierUserPage(supplier)" ><i class="glyphicon glyphicon-wrench"></i>审核</button>
+                                        &nbsp;
+                                        <button type="button"  class="btn btn-danger c-btn-square"  ><i class="glyphicon glyphicon-trash"></i>删除</button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+<div id="reviewSupplierUser" hidden="true">
+
+
+
+    <!--返回-->
+    <div class="modal-header" style="border: 0px">
+
+        <a href="javascript:;" v-on:click="toHotelUserPage()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">审核</div>
+
+        </a>
+
+    </div>
+
+    <!--审核界面  展示商品的所有数据-->
+    <div class="modal-body" style="border-bottom: 0px">
+        <form class="form-horizontal" role="form" >
+            <!--系统编号-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">系统编号:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+
+                    <input type="text" disabled="disabled" maxlength="50" v-model="reviewList.id" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+
+            <!--注册人姓名-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">联系人:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+
+                    <input type="text" disabled="disabled" maxlength="50" v-model="reviewList.username" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--供应商编号编号-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">供应商编号:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+                    <input type="text" disabled="disabled" maxlength="50" v-model="reviewList.supplierId" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--供应商名称-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">供应商名称:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+                    <input type="text" disabled="disabled" maxlength="50" v-model="supplierName" class="form-control  c-square c-theme"  >
+                </div>
+
+            </div>
+            <!--联系电话-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">联系电话:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+
+
+                    <input type="text" disabled="disabled"  maxlength="50" v-model="reviewList.phone" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+
+            <!--审核备注-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">审核备注:</label>
+                <div class="col-md-4 control-label" >
+                    <input type="text"   maxlength="50" v-model="reviewList.auditComment" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--详细地址-->
+            <div class="form-group" style="text-align: left">
+                <label class="col-md-4 control-label">详细地址:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+                    <!--<span>{{hotelUserList.phone}}{{hotelUserList.phone}}</span>-->
+
+                    <input type="text" disabled="disabled"  maxlength="50" v-model="reviewList.address" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+
+            <!--修改地址-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">修改地址:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+                    <input type="text"  maxlength="50" v-model="reviewList.address" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </form>
+        </form>
+
+    </div>
+
+    <div  class="modal-footer col-md-12" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click="sureReviewSupplierUser()" >通&nbsp;&nbsp;过
+        </button>
+        <button type="button" class="btn btn-primary" v-on:click="NosureReviewSupplierUser()" >不&nbsp;&nbsp;通&nbsp;&nbsp;过
+        </button>
+        <button type="button"  class="btn btn-primary" v-on:click="toHotelUserPage()">取&nbsp;&nbsp;消
+        </button>
+
+    </div>
+</div>
+
+<div id="bar"></div>
+<script src="assets/heos/default/js/pageBar.js"></script>
+<script>
+    var store = {
+        debug: true,
+        state: {
+            //获取的所有记录
+            listShare: [],
+
+        },
+
+        setMessageAction (newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue)
+            this.state.consultantlistShare = newValue
+        },
+        clearMessageAction () {
+            if (this.debug) console.log('clearMessageAction triggered')
+            this.state.consultantlistShare = ''
+        }
+    };
+    var supplierUserShow = new Vue({
+        el:"#supplierUserShow",
+        data:{
+            supplierUserList:store.state,
+           supplierList:{auditStatus:-1},
+
+        },
+        created:function () {
+
+            var data ={};
+            data.userType = 3;
+            data.auditStatus = -1;
+            var url = "user/getAllhotelRegister";
+
+
+
+            //查询条件
+            //派出pageIndex oageSize
+            //传条件
+            postPageInfo(data,url);
+            initPageBar();
+
+
+
+        },
+        methods: {
+            getAllSupplierUsers:function () {
+                var data ={};
+                data.userType = 3;
+                data.username = supplierUserShow.supplierList.username;
+                data.auditStatus = supplierUserShow.supplierList.auditStatus;
+                data.phone = supplierUserShow.supplierList.phone;
+              //  data.auditStatus = -1;
+                var url = "user/getAllhotelRegister";
+
+
+
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                postPageInfo(data,url);
+                initPageBar();
+            },
+            getAllSupplierUser:function(){
+                var data ={};
+                data.userType = 3;
+                data.auditStatus = -1;
+                var url = "user/getAllhotelRegister";
+
+
+
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                postPageInfo(data,url);
+                initPageBar();
+            },
+
+            toReviewSupplierUserPage:function (supplier) {
+                var supplierIdIndex ={}
+                $("#supplierUserShow").hide();
+                $("#reviewSupplierUser").show();
+                $("#bar").hide();
+                reviewSupplierUser.reviewList = supplier;
+
+                supplierIdIndex = supplier.supplierId;
+                reviewSupplierUser.getOneSupplier(supplierIdIndex);
+
+
+            }
+        }
+    });
+    var reviewSupplierUser = new Vue({
+        el:"#reviewSupplierUser",
+        data:{
+            reviewSupplier:[],
+            reviewList:{},
+            supplierName:""
+        },
+        methods:{
+            getOneSupplier:function(supplierIdIndex){
+                var data = {};
+                data.id = supplierIdIndex;
+                _this = this;
+             //   alert(data.id);
+                $.ajax({
+                    type: "POST",
+                    url: "supplier/getOneSupplier",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        // 需要重新再次查询数据库
+                        _this.supplierName = result.data.rows.supplierName;
+                        reviewSupplierUser.supplierName=result.data.rows.supplierName;
+
+
+                    },
+                    error: function () {
+
+                    }
+                });
+            },
+            sureReviewSupplierUser:function () {
+                var data = {};
+                data.auditStatus =2;
+                data.id= reviewSupplierUser.reviewList.id;
+              //  data.hotelName = reviewHotelUser.hotelUserList.hotelName;
+                data.supplierlId =reviewSupplierUser.reviewList.supplierId;
+                data.auditComment=reviewSupplierUser.reviewList.auditComment;
+
+                //    data.auditComment=reviewGood.reviewList.auditComment;
+                $.ajax({
+                    type: "POST",
+                    url: "user/reviewHotelRegister",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        // 需要重新再次查询数据库
+                        supplierUserShow.getAllSupplierUser();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#supplierUserShow").show();
+                $("#bar").show();
+                $("#reviewSupplierUser").hide();
+
+
+
+            },
+            NosureReviewSupplierUser :function(){
+                var data = {};
+                data.auditStatus =3;
+                data.id= reviewSupplierUser.reviewList.id;
+               // data.hotelName = reviewHotelUser.hotelUserList.hotelName;
+                data.supplierlId =reviewSupplierUser.reviewList.supplierId;
+                data.auditComment=reviewSupplierUser.reviewList.auditComment;
+                $.ajax({
+                    type: "POST",
+                    url: "user/reviewHotelRegister",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        // 需要重新再次查询数据库
+                        supplierUserShow.getAllSupplierUser();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#supplierUserShow").show();
+                $("#bar").show();
+                $("#reviewSupplierUser").hide();
+            },
+            toHotelUserPage:function () {
+                $("#supplierUserShow").show();
+                $("#bar").show();
+                $("#reviewSupplierUser").hide();
+            }
+
+        }
+
+    })
+
+
+</script>

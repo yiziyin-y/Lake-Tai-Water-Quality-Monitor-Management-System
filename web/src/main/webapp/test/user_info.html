@@ -1,0 +1,428 @@
+<!--用户注册Start-->
+<div id = "register" >
+
+    <div class="modal-body" style="border-bottom: 0px">
+
+        <form class="form-horizontal" role="form" >
+
+            <!--账户类型-->
+            <div id = "userType" class="form-group "  >
+                <label class="col-md-4  control-label"><strong>账户类型:</strong></label>
+
+                <div class="col-md-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="food" value="3" v-model=" user.userType" v-on:click = "cheackSupplier()"> 供应商
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="food"  value="2" v-model=" user.userType" v-on:click = "cheackHotel()"> 酒店
+                    </label>
+
+                </div>
+
+            </div>
+            <!--Heos信息-->
+            <div id = "heos" hidden = "true">
+                <!--酒店名称-->
+
+                <!--归属酒店名称-->
+                <div class="form-group" >
+
+
+                    <label class="col-md-4 control-label">归属酒店名称:</label>
+                    <div id="noHaveName" class="col-md-4" hidden = "true">
+                        <input type="text"  maxlength="50" v-model="hotel.hotelName" class="form-control  c-square c-theme"  >
+                    </div>
+                    <div id = "haveName" class="col-md-4">
+                        <!--<select v-model = "good.brandId" -->
+                        <select  id = "hotel" class="form-control input-lg c-square" style="width: 100%" name="state" v-model="hotelIndex" >
+                            <option  value="-1" selected = "selected">--选择酒店--</option>
+                            <option v-for="(hotel,index) in hotelList" v-bind:value="index" v-text="hotel.hotelName" ></option>
+                        </select>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="c-checkbox has-info">
+                            <input type="checkbox" id="checkbox12-111" class="c-check" v-on:click="trickHoes()">
+                            <label for="checkbox12-111">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                没有我的酒店
+                            </label>
+                            <span style="size:5px;color: black">&nbsp;&nbsp;*</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--地址-->
+                <div class="form-group "  >
+
+                    <label class="col-md-4  control-label">地址:</label>
+                    <div class="col-md-5">
+                        <div id="heosDistpicker" data-toggle="distpicker">
+                            <select v-model = "user.hotelProvince"></select>
+                            <select v-model = "user.hotelCity"></select>
+                            <select v-model = "user.hotelDistrict"></select>
+                            <font size="5" >&nbsp;&nbsp;*</font>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--详细地址-->
+                <div class="form-group "  >
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4  control-label">详细地址:</label>
+                    <div class="col-md-4">
+                        <input type="text"  maxlength="50" v-model="user.hotelAddress" class="form-control  c-square c-theme"  >
+                    </div>
+
+                </div>
+                <!--酒店电话-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">酒店电话:</label>
+                    <div class="col-md-4">
+                        <input type="text"  maxlength="50" v-model="user.hotelPhone" class="form-control  c-square c-theme"  >
+
+                    </div>
+                </div>
+            </div>
+            <!--supplier信息-->
+            <div id = "supplier">
+                <!--供应商的名称-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">供应商名称:</label>
+                    <div class="col-md-4">
+                        <input type="text" v-model = "supplier.supplierName" maxlength="50" v-model="good.description" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--供应商的类别-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">供应商类别:</label>
+                    <div class="col-md-4">
+                        <select class="form-control input-lg c-square" v-model = "supplier.suppType">
+                            <option  value="-1" selected = "selected">--选择供应商类别--</option>
+                            <option>一级</option>
+                            <option>二级</option>
+                        </select>
+
+                    </div>
+                </div>
+                <!--公司地址-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">公司地址:</label>
+                    <div class="col-md-5">
+                        <div id="supplierDistpicker" data-toggle="distpicker">
+                            <select v-model = "supplier.province"></select>
+                            <select v-model = "supplier.city"></select>
+                            <select v-model = "supplier.district"></select>
+                        </div>
+                    </div>
+                </div>
+                <!--详细地址-->
+                <div class="form-group "  >
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4  control-label">详细地址:</label>
+                    <div class="col-md-4">
+                        <input type="text" v-model = "supplier.regAddress" maxlength="50" v-model="good.englishName" class="form-control  c-square c-theme"  >
+                    </div>
+
+                </div>
+                <!--税号-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">税号:</label>
+                    <div class="col-md-4">
+                        <input type="number"  maxlength="50" v-model="supplier.taxNo" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--开户行名称-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">开户行名称:</label>
+                    <div class="col-md-4">
+                        <input type="text"  maxlength="50" v-model="supplier.bank" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+
+                <!--开户行地址-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">开户行地址:</label>
+                    <div class="col-md-5">
+                        <div id="accountDistpicker" data-toggle="distpicker">
+                            <select v-model = "supplier.bankProvince"></select>
+                            <select v-model = "supplier.bankCity"></select>
+                            <select v-model = "supplier.bankDistrict"></select>
+                        </div>
+                    </div>
+                </div>
+                <!--详细地址-->
+                <div class="form-group "  >
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4  control-label">详细地址:</label>
+                    <div class="col-md-4">
+                        <input type="text" v-model = "supplier.bankDetailArea" maxlength="50" v-model="good.englishName" class="form-control  c-square c-theme"  >
+                    </div>
+
+                </div>
+                <!--银行账号-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">银行账号:</label>
+                    <div class="col-md-4">
+                        <input type="text"  maxlength="50" v-model= "supplier.bankAccount" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--注册资金-->
+                <div class="form-group">
+
+                    <label class="col-md-4 control-label">注册资金:</label>
+                    <div class="col-md-4">
+                        <input type="number"  v-model="supplier.regCapital" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--员工人数-->
+                <div class="form-group">
+
+                    <label class="col-md-4 control-label">员工人数:</label>
+                    <div class="col-md-4">
+                        <input type="number"  v-model="supplier.empCnt" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--法人代表-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">法人代表:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.legalRep" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--法人代表联系电话-->
+                <div class="form-group">
+
+                    <label class="col-md-4 control-label">法人代表联系电话:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.legalRepPhone" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--法人代表邮箱-->
+                <div class="form-group">
+
+                    <label class="col-md-4 control-label">法人代表邮箱:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.legalRepEmail" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--联系人1-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人1:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.contact" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--联系人1职位-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人1职位:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.contactPosition" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--联系人1电话-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人1电话:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.contactPhone" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--联系人1邮箱-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人1邮箱:</label>
+                    <div class="col-md-4">
+                        <input type="email"  v-model="supplier.contactEmail" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--联系人1手机-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人1手机:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.contactMobile" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+
+
+                <!--联系人2-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人2:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.contact2" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--联系人2职位-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人2职位:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.contact2Position" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--联系人2电话-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人2电话:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.contact2Phone" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--联系人2邮箱-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人2邮箱:</label>
+                    <div class="col-md-4">
+                        <input type="email"  v-model="supplier.contact2Email" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--联系人2手机-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">联系人2手机:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.contact2Mobile" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+
+                <!--营业执照有效期开始时间-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">营业执照有效期::</label>
+                    <div class="col-md-4">
+                        <input type="date"  v-model="supplier.busLicEffFromTime" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--营业执照有效期结束时间-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">营业执照有效期::</label>
+                    <div class="col-md-4">
+                        <input type="date"  v-model="supplier.busLicEffToTime" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+
+                <!--公司资质文件上传-->
+                <div class="form-group">
+                    <font size="5" >&nbsp;&nbsp;*</font>
+                    <label class="col-md-4 control-label">公司资质文件上传:</label>
+                    <div class="col-md-4">
+                        <div class="inputbg_button">
+                            <input type="file"   class="form-control  c-square c-theme" v-on:change="upImg($event)" >
+                        </div>
+                    </div>
+                </div>
+                <!--详情图的展示列-->
+                <div id = "image" class="form-group">
+                    <label class="col-md-4 control-label"></label>
+
+
+                </div>
+                <!--公司业绩-->
+                <div class="form-group">
+
+                    <label class="col-md-4 control-label">公司业绩:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.performance" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+                <!--可服务城市-->
+                <div class="form-group">
+
+                    <label class="col-md-4 control-label">可服务城市:</label>
+                    <div class="col-md-4">
+                        <input type="text"  v-model="supplier.serviceCity" class="form-control  c-square c-theme"  >
+                    </div>
+                </div>
+            </div>
+            <div id = "userCommond">
+            <!--邮箱-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">邮箱:</label>
+                <div class="col-md-4">
+                    <input type="email"  maxlength="50"  class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--电话-->
+            <div class="form-group">
+                <font size="5" >&nbsp;&nbsp;*</font>
+                <label class="col-md-4 control-label">电话:</label>
+                <div class="col-md-4">
+                    <input type="text"  maxlength="50" v-model="user.phone" class="form-control  c-square c-theme"  >
+
+                </div>
+            </div>
+            <!--姓名-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">姓名:</label>
+                <div class="col-md-4">
+                    <input type="text"  maxlength="50" v-model="user.username" class="form-control  c-square c-theme"  >
+
+                </div>
+            </div>
+            <!--性别-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">性别:</label>
+                <div class="col-md-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="sex"  value="1" v-model="user.sex" > 男
+                    </label>
+                    <label class="radio-inline">
+
+                        <input type="radio" name = "sex" value="2" v-model="user.sex" > 女
+                    </label>
+
+                </div>
+
+            </div>
+            <!--密码-->
+            <div class="form-group">
+                <font size="5" >&nbsp;&nbsp;*</font>
+                <label class="col-md-4 control-label">密码:</label>
+                <div class="col-md-4">
+                    <input type="password"  v-model="user.password" maxlength="50"  class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--国家-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">国家:</label>
+                <div class="col-md-4">
+                    <select class="form-control input-lg c-square" >
+                        <option  value="-1" selected = "selected">--选择国家--</option>
+                        <option>中国</option>
+
+                    </select>
+                    </select>
+
+                </div>
+            </div>
+            </div>
+        </form>
+    </div>
+    <div id = "button" class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary"  v-on:click = "register()">注&nbsp;&nbsp;册
+        </button>
+        <button type="button" class="btn btn-primary" >返回登录
+        </button>
+
+    </div>
+</div>
+<!--用户注册End-->

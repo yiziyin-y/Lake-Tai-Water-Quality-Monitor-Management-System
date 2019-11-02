@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<fontFamilies>
+    <fontFamily name="STZHONGS">
+        <normal><![CDATA[fonts/STZHONGS.TTF]]></normal>
+        <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+        <exportFonts>
+            <export key="net.sf.jasperreports.html">'STZHONGS', Arial, Helvetica, sans-serif</export>
+            <export key="net.sf.jasperreports.xhtml">'STZHONGS', Arial, Helvetica, sans-serif</export>
+        </exportFonts>
+    </fontFamily>
+</fontFamilies>

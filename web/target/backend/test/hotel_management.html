@@ -1,0 +1,461 @@
+<script src="../assets/heos/default/js/distpicker.js"></script>
+<div id="hotelUserShow" style="width: inherit" >
+    <div id = "goodOperation" class="c-body" style="border:0px">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索条件</h4>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="vhotelUserName" class="col-md-4 control-label">用户：</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control c-square c-theme" id="vhotelUserName" v-model="searchList.username"  >
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="hotelname" class="col-md-4 control-label">酒店：</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control c-square c-theme" id="hotelname" v-model="searchList.hotelName"  >
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="hotelDept" class="col-md-4 control-label">部门：</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control c-square c-theme" id="hotelDept" v-model="searchList.dept"  >
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="hoteltel" class="col-md-4 control-label">联系电话：</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control c-square c-theme" id="hoteltel" v-model="searchList.phone"  >
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="reviewStatus1" class="col-md-4 control-label">审核状态：</label>
+
+
+                <div class="col-md-5">
+                <select id="reviewStatus1" class="col-md-6"  v-model="searchList.auditStatus" style="width: 155.34px" >
+                    <option selected = "selected" value="-1">--方案--</option>
+                    <option value="1" >待审核</option>
+                    <option value="2">审核成功</option>
+                    <option value="3">审核失败</option>
+
+
+                </select>
+
+                </div>
+            </div>
+
+            <div class="col-md-12" style="text-align: right; width: 70%">
+                <h6>&nbsp;</h6>
+                <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="getAllHotelUsers()" ><i class="fa fa-search"></i> 查询</button>
+                <h6>&nbsp;</h6>
+
+            </div>
+        </div>
+    </div>
+    <div class="c-body" style="border: 0px">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索结果</h4>
+                </div>
+            </div>
+        </div>
+        <ul>
+            <div  class="c-content">
+                <div class="c-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                <td  style="text-align: left">姓名</td>
+                                <td  style="text-align: left">酒店</td>
+                                <td  style="text-align: left">部门</td>
+                                <td  style="text-align: left">联系电话</td>
+                                <td  style="text-align: left">审核状态</td>
+
+                                <td  style='text-align: left;' colspan="2">操作</td>
+                                </thead>
+                                <tbody >
+                                <tr v-for="(hotel,index) in hotelUser.listShare"  v-bind:id=' hotelUser.listShare.id' >
+                                    <td>{{hotel.username}}</td>
+                                    <td>{{hotel.hotelName}}</td>
+                                    <td>{{hotel.dept}}</td>
+                                    <td>{{hotel.phone}}</td>
+                                    <td v-if="hotel.auditStatus ==1">未审核</td>
+                                    <td v-if="hotel.auditStatus ==2">审核成功</td>
+                                    <td v-if="hotel.auditStatus ==3">审核失败</td>
+
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="ToReviewHotelUserPage(hotel)"><i class="glyphicon glyphicon-wrench"></i>审核</button>
+                                        &nbsp;
+                                        <button type="button"  class="btn btn-danger c-btn-square"  ><i class="glyphicon glyphicon-trash"></i>删除</button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+<div id="reviewHotelUser" hidden="true">
+
+
+
+    <!--返回-->
+    <div class="modal-header" style="border: 0px">
+
+        <a href="javascript:;" v-on:click="toHotelUserPage()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">审核</div>
+
+        </a>
+
+    </div>
+
+    <!--审核界面  展示商品的所有数据-->
+    <div class="modal-body" style="border-bottom: 0px">
+        <form class="form-horizontal" role="form" >
+            <!--系统编号-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">系统编号:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+
+                    <input type="text" disabled="disabled" maxlength="50" v-model="hotelUserList.id" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+
+            <!--注册人姓名-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">注册人姓名:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+
+                    <input type="text" disabled="disabled" maxlength="50" v-model="hotelUserList.username" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--归属酒店编号-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">酒店编号:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+                    <input type="text" disabled="disabled" maxlength="50" v-model="hotelUserList.hotelId" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--归属酒店名称-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">酒店名称:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+
+                    <input type="text" disabled="disabled" maxlength="50" v-model="hotelUserList.hotelName" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--联系电话-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">联系电话:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+
+                    <input type="text" disabled="disabled"  maxlength="50" v-model="hotelUserList.phone" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--审核备注-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">审核备注:</label>
+                <div class="col-md-4 control-label" >
+                    <input type="text"   maxlength="50" v-model="hotelUserList.auditComment" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--酒店详细地址-->
+            <div class="form-group" style="text-align: left">
+                <label class="col-md-4 control-label">酒店详细地址:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+                    <!--<span>{{hotelUserList.phone}}{{hotelUserList.phone}}</span>-->
+
+                    <input type="text" disabled="disabled"  maxlength="50" v-model="hotelUserList.HotelAdress" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+            <!--选择酒店-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">选择酒店:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+
+                    <select  id = "hotel" class="form-control input-lg c-square" style="width: 100%" name="state"  >
+                        <option  value="-1" selected = "selected">--选择酒店--</option>
+                        <option v-for="(hotel,index) in hotelList" v-bind:value="index" v-text="hotel.hotelName" ></option>
+                    </select>
+                    </select>
+                </div>
+            </div>
+
+            <!--酒店所在的省市区：-->
+            <div class="form-group" style="text-align: left">
+                <label class="col-md-4 control-label">酒店所在的省市区:</label>
+                <div class="col-md-4 control-label" disabled="disabled">
+                    <span>{{hotelUserList.hotelProvince}}{{hotelUserList.hotelCity}}{{hotelUserList.hotelDistrict}}</span>
+
+
+
+                </div>
+            </div>
+            <!--修改地址-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">修改地址:</label>
+                <div class="col-md-4 control-label" >
+                    <input type="text"  maxlength="50" v-model="hotelUserList.hotelAdress" class="form-control  c-square c-theme"  >
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </form>
+        </form>
+
+    </div>
+
+    <div  class="modal-footer col-md-12" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click="sureReviewHotelUser()" >通&nbsp;&nbsp;过
+        </button>
+        <button type="button" class="btn btn-primary" v-on:click="NosureReviewHotelUser()" >不&nbsp;&nbsp;通&nbsp;&nbsp;过
+        </button>
+        <button type="button"  class="btn btn-primary" v-on:click="toHotelUserPage()">取&nbsp;&nbsp;消
+        </button>
+
+    </div>
+</div>
+<div id="bar"></div>
+<script src="assets/heos/default/js/pageBar.js"></script>
+<script>
+
+
+</script>
+<script>
+
+
+
+    var store = {
+        debug: true,
+        state: {
+            //获取的所有记录
+            listShare: [],
+
+        },
+
+        setMessageAction (newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue)
+            this.state.consultantlistShare = newValue
+        },
+        clearMessageAction () {
+            if (this.debug) console.log('clearMessageAction triggered')
+            this.state.consultantlistShare = ''
+        }
+    };
+    var hotelUserShow  = new Vue({
+        el:"#hotelUserShow",
+        data:{
+            hotelUser:store.state,
+            searchList:{auditStatus: -1},
+
+
+        },
+        created:function () {
+            var data ={};
+            data.userType = 2;
+            data.auditStatus = -1;
+            var url = "user/getAllhotelRegister";
+
+
+
+            //查询条件
+            //派出pageIndex oageSize
+            //传条件
+            postPageInfo(data,url);
+            initPageBar();
+
+
+        },
+        methods:{
+
+            getAllHotelUsers:function () {
+                var data = {};
+                data.username = hotelUserShow.searchList.username;
+                data.hotelName = hotelUserShow.searchList.hotelName;
+                data.userType = 2;
+                data.phone = hotelUserShow.searchList.phone;
+                data.dept = hotelUserShow.searchList.dept;
+                data.auditStatus =hotelUserShow.searchList.auditStatus;
+                var url = "user/getAllhotelRegister";
+                postPageInfo(data,url);
+                initPageBar();
+
+
+
+            },
+            getAllHotelUser:function () {
+                var data ={};
+                data.userType = 2;
+                data.auditStatus = -1;
+                var url = "user/getAllhotelRegister";
+
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                postPageInfo(data,url);
+                initPageBar();
+
+
+
+            },
+            ToReviewHotelUserPage:function(hotel){
+                $("#hotelUserShow").hide();
+                $("#bar").hide();
+                $("#reviewHotelUser").show();
+                reviewHotelUser.hotelUserList = hotel;
+
+            }
+
+
+        }
+    });
+    var reviewHotelUser = new Vue({
+        el:"#reviewHotelUser",
+        data:{
+            hotelUserList:{},
+            hotelList:[]
+        },
+        created:function () {
+            this. getAllHotels();
+
+        },
+        methods:{
+            getAllHotels:function () {
+                var data = {};
+                _this =this;
+                $.ajax({
+                    type:"POST",
+                    url:"hotel/getAllHotel",
+                    dataType:"json",
+                    data:data,
+                    success:function(result){
+                        _this.hotelList = result.data.rows;
+                        _this.$nextTick(function () {
+                            $('#hotel').select2();
+
+                        });
+
+
+                    },
+                    error:function () {
+
+                    }
+                });
+            },
+            sureReviewHotelUser:function () {
+                var data = {};
+                data.auditStatus =2;
+                data.id= reviewHotelUser.hotelUserList.id;
+                data.hotelName = reviewHotelUser.hotelUserList.hotelName;
+                data.hotelId = reviewHotelUser.hotelUserList.hotelId;
+                data.auditComment=reviewHotelUser.hotelUserList.auditComment;
+                data.hotelProvince = reviewHotelUser.hotelUserList.hotelProvince;
+
+                data.hotelCity = reviewHotelUser.hotelUserList.hotelCity;
+                data.hotelAdress = reviewHotelUser.hotelUserList.hotelAdress;
+
+                data.hotelDistrict = reviewHotelUser.hotelUserList.hotelDistrict;
+
+
+            //    data.auditComment=reviewGood.reviewList.auditComment;
+                $.ajax({
+                    type: "POST",
+                    url: "user/reviewHotelRegister",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        // 需要重新再次查询数据库
+                        hotelUserShow.getAllHotelUser();
+
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#hotelUserShow").show();
+                $("#bar").show();
+                $("#reviewHotelUser").hide();
+
+
+
+            },
+            NosureReviewHotelUser:function(){
+                var data = {};
+                data.auditStatus =3;
+                data.id= reviewHotelUser.hotelUserList.id;
+                data.hotelName = reviewHotelUser.hotelUserList.hotelName;
+                data.hotelId = reviewHotelUser.hotelUserList.hotelId;
+                data.auditComment=reviewHotelUser.hotelUserList.auditComment;
+                $.ajax({
+                    type: "POST",
+                    url: "user/reviewHotelRegister",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        // 需要重新再次查询数据库
+                        hotelUserShow.getAllHotelUser();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#hotelUserShow").show();
+                $("#bar").show();
+                $("#reviewHotelUser").hide();
+            },
+
+            toHotelUserPage:function () {
+                $("#hotelUserShow").show();
+                $("#reviewHotelUser").hide();
+                $("#bar").show()
+
+            }
+        }
+
+    });
+    $('#hotel').change(function(){
+        var hotelIdIndex = $(this).children('option:selected').val();
+        reviewHotelUser.hotelUserList.hotelId = reviewHotelUser.hotelList[hotelIdIndex].id;
+        reviewHotelUser.hotelUserList.hotelName=reviewHotelUser.hotelList[hotelIdIndex].hotelName;
+        reviewHotelUser.hotelUserList.hotelProvince=reviewHotelUser.hotelList[hotelIdIndex].hotelProvince;
+
+        reviewHotelUser.hotelUserList.hotelCity=reviewHotelUser.hotelList[hotelIdIndex].hotelCity;
+        reviewHotelUser.hotelUserList.hotelDistrict=reviewHotelUser.hotelList[hotelIdIndex].hotelDistrict;
+        reviewHotelUser.hotelUserList.hotelAdress=reviewHotelUser.hotelList[hotelIdIndex].hotelAdress;
+        // reviewGood.minTypeIndex = minIndex;
+       // reviewGood.reviewList.goodTypeId = reviewGood.minType[minIndex].id;
+
+
+    });
+
+    $("#distpicker1").distpicker({
+        province: '---- 所在省 ----',
+        city: '---- 所在市 ----',
+        district: '---- 所在区 ----'
+    });
+
+</script>

@@ -1,0 +1,393 @@
+<div id="vhotelArea"  style="width: inherit" >
+    <div class="modal-header" style="border: 0px">
+        <div class="from-group" style="padding-bottom: 50px">
+            <label class="col-md-4 control-label">虚拟酒店方案:&nbsp;</label>
+            <div class="col-md-2"   style="height: inherit;width: 140px">
+
+                <select id="vhotelProp"  name="state"  >
+                    <option selected = "selected">--方案--</option>
+                    <option v-for="(type,index) in vhotelProp" v-bind:value="index" v-text="type.propName"></option>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+    <div id = "goodOperation" class="c-body" style="border:0px">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索条件</h4>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="vHotelAreaName" class="col-md-4 control-label">酒店区域</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control c-square c-theme" id="vHotelAreaName" v-model="searchByName"  >
+                </div>
+            </div>
+            <div class="col-md-12" style="text-align: right; width: 70%">
+                <h6>&nbsp;</h6>
+                <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="getAllVotelAreas()" ><i class="fa fa-search"></i> 查询</button>
+                <h6>&nbsp;</h6>
+                <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toAddAreaPage()"><i class="fa fa-plus"></i> 添加</button>
+            </div>
+        </div>
+    </div>
+    <div class="c-body" style="border: 0px">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索结果</h4>
+                </div>
+            </div>
+        </div>
+        <ul>
+            <div  class="c-content">
+                <div class="c-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                <td  style="text-align: left">创建时间</td>
+                                <td  style="text-align: left">区域</td>
+                                <td  style='text-align: left;' colspan="2">操作</td>
+                                </thead>
+                                <tbody >
+                                <tr v-for="(vhArea,index) in vhotelArea.listShare"  v-bind:id='vhotelArea.listShare.id' >
+                                    <td>{{vhArea.creationDate}}</td>
+                                    <td>{{vhArea.areaName}}</td>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toEditAreaPage(vhArea)"><i class="glyphicon glyphicon-wrench"></i>编辑</button>
+                                        &nbsp;
+                                        <button type="button"  class="btn btn-danger c-btn-square" v-on:click="delectVhotelArea(vhArea)" ><i class="glyphicon glyphicon-trash"></i>删除</button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+
+<!--添加区域  开始-->
+<div id = "addArea" hidden="true">
+    <div class="modal-header" style="border: 0px">
+        <a href="javascript:;" v-on:click="toVhotelAreaPage()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">新增</div>
+        </a>
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="AreaFrom">
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">区域名:&nbsp;</label>
+                <div class="col-md-6">
+                    <input type="text"  maxlength="50"  class="form-control  c-square c-theme"  v-model="addArea.areaName" >
+                    <span style="color: red">{{checkAreaName}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div  class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click=" sureAddArea()" >添&nbsp;&nbsp;加
+        </button>
+        <button type="button" v-on:click="toVhotelAreaPage()" class="btn btn-primary" >取&nbsp;&nbsp;消
+        </button>
+    </div>
+</div>
+<!--添加 区域 结束-->
+
+
+<!--编辑 区域 开始-->
+<div id = "editArea" hidden="true">
+    <div class="modal-header" style="border: 0px">
+        <a href="javascript:;" v-on:click="toVhotelAreaPage()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">编辑</div>
+        </a>
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="editAreaFrom">
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">区域名:&nbsp;</label>
+                <div class="col-md-6">
+                    <input type="text"  maxlength="50"  class="form-control  c-square c-theme"  v-model="editArea.areaName" >
+                    <span style="color: red">{{checkAreaName}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div  class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click=" sureEditArea()" >保&nbsp;&nbsp;存
+        </button>
+        <button type="button" v-on:click="toVhotelAreaPage()" class="btn btn-primary" >取&nbsp;&nbsp;消
+        </button>
+    </div>
+</div>
+<!--编辑 区域 结束-->
+
+<div id="bar"></div>
+
+
+<script>
+    var store = {
+        debug: true,
+        state: {
+            //获取的所有记录
+            listShare: [],
+
+        },
+
+        setMessageAction (newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue)
+            this.state.consultantlistShare = newValue
+        },
+        clearMessageAction () {
+            if (this.debug) console.log('clearMessageAction triggered')
+            this.state.consultantlistShare = ''
+        }
+    }
+    var vhotelArea = new Vue({
+        el:"#vhotelArea",
+        data:{
+            vhotelProp:[],
+            vhotelArea:store.state,
+            vhotelPropIndex:-1,
+            searchByName:""
+        },
+        created:function () {
+            this.getAllVotelProps();
+
+        },
+        methods:{
+            getAllVotelProps:function () {
+                    var data = {};
+                    data.propName ="";
+                   // data.parentId = 0;
+                   // data.type =1;
+                    _this =this;
+                    $.ajax({
+                        type:"POST",
+                        url:"vhotel/getAllVhotelPropWithoutPageInfo",
+                        dataType:"json",
+                        data:data,
+                        success:function(result){
+                            _this.vhotelProp = result.data.rows;
+                            _this.$nextTick(function () {
+                                $('#vhotelProp').select2();
+                            })
+
+                        },
+                        error:function () {
+
+                        }
+                    });
+                },
+            getAllVotelAreas:function () {
+                var data = {}
+                data.vhotelPropId = vhotelArea.vhotelPropIndex;
+                data.areaName = vhotelArea.searchByName;
+                var url = "vhotelAreas/getAllVhotelAreas";
+                postPageInfo(data,url);
+                initPageBar();
+            },
+            toAddAreaPage:function () {
+                $("#vhotelArea").hide();
+                $("#bar").hide();
+                $("#addArea").show();
+
+            },
+            toEditAreaPage:function(vhArea){
+                $("#vhotelArea").hide();
+                $("#bar").hide();
+                $("#editArea").show();
+                editArea.editArea = vhArea;
+            },
+
+            delectVhotelArea:function (vhArea) {
+                if(!confirm("确定删除？")){
+                    return;
+                }
+                var data = {};
+                data.id =  vhArea.id;
+
+                $.ajax({
+                    type: "POST",
+                    url: "vhotelAreas/delectArea",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        alert("success");
+                       vhotelArea.getAllVotelAreas();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            },
+
+
+            }
+
+
+    });
+
+    var addArea = new Vue({
+        el:"#addArea",
+
+        data:{
+            addArea:[],
+            checkAreaName:""
+
+        },
+        methods:{
+            sureAddArea:function () {
+                var data ={}
+                if(addArea.addArea.areaName ==null){
+                    this.checkAreaName="区域名不能为空"
+                }else {
+                    this.checkAreaName=""
+                }
+                data.areaName = addArea.addArea.areaName;
+                data.vhotelPropId = addArea.addArea.vhotelPropId;
+                    $.ajax({
+                        type: "POST",
+                        url:"vhotelAreas/insert",
+                        dataType: "json",
+                        data: data,
+                        success: function (result) {
+                            if(result.status == 1){
+                                alert("success")
+                              vhotelArea.getAllVotelAreas();
+                                addArea.addArea.areaName=null;
+
+
+                            }else{
+                                alert(result.message);
+
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                    $("#vhotelArea").show();
+                    $("#addArea").hide();
+                    $("#bar").show();
+                },
+            toVhotelAreaPage:function () {
+                $("#vhotelArea").show();
+                $("#bar").show();
+                $("#addArea").hide();
+
+            },
+
+
+
+            }
+
+    });
+
+    var editArea = new Vue({
+        el:"#editArea",
+        data:{
+            editArea:[],
+            checkAreaName:""
+
+
+        },
+        methods:{
+            sureEditArea:function () {
+                var data ={}
+                if(editArea.editArea.areaName ==null){
+                    this.checkAreaName="区域名不能为空"
+                }else {
+                    this.checkAreaName=""
+                }
+                data.areaName = editArea.editArea.areaName;
+                data.vhotelPropId = editArea.editArea.vhotelPropId;
+                data.id = editArea.editArea.id;
+                $.ajax({
+                    type: "POST",
+                    url:"vhotelAreas/updateArea",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 1){
+                            alert("success")
+                            vhotelArea.getAllVotelAreas();
+
+
+
+                        }else{
+                            alert(result.message);
+
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#vhotelArea").show();
+                $("#editArea").hide();
+                $("#bar").show();
+            },
+            toVhotelAreaPage:function () {
+                $("#vhotelArea").show();
+                $("#bar").show();
+                $("#editArea").hide();
+
+            },
+
+        }
+
+    });
+
+
+
+    $('#vhotelProp').change(function () {
+        var data ={};
+        var bigIndex = $(this).children('option:selected').val();//指针
+        vhotelArea.vhotelPropIndex =vhotelArea.vhotelProp[bigIndex].id;//父类指针
+        addArea.addArea.vhotelPropId= vhotelArea.vhotelProp[bigIndex].id;
+
+
+     //   data.parentId = addGoodType.bigTypeIndex;
+       // data.type = 2;
+        data.vhotelPropId = vhotelArea.vhotelProp[bigIndex].id;
+        var url = "vhotelAreas/getAllVhotelAreas";
+
+        //查询条件
+        //派出pageIndex oageSize
+        //传条件
+        postPageInfo(data,url);
+        initPageBar();
+
+
+        // $.ajax({
+        //     type:"POST",
+        //     url:"vhotelAreas/getAllMidTypes",
+        //     dataType:"json",
+        //     data:data,
+        //     success:function(result){
+        //         vhotelArea.vhotelArea = result.data.rows;
+        //        // $('#midType').select2();
+        //     },
+        //     error:function () {
+        //
+        //     }
+        // });
+
+
+
+
+    });
+
+</script>

@@ -1,0 +1,149 @@
+<!-- BEGIN: CONTENT/USER/FORGET-PASSWORD-FORM -->
+<div class="modal fade c-content-login-form" id="forget-password-form" role="dialog"
+     xmlns:v-on="http://java.sun.com/jsf/composite" xmlns:v-on="http://java.sun.com/jsf/core"
+     xmlns:v-on="http://java.sun.com/jsf/facelets" xmlns:v-on="http://java.sun.com/jsf/html">
+    <div class="modal-dialog">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="c-font-24 c-font-sbold">密码恢复</h3>
+                <p>{{message}}</p>
+                <form>
+                    <div class="form-group">
+                        <label for="forget-email" class="hide">Email</label>
+                        <input type="email" v-on:change = "mouseMoveOut()" v-model = "forgetPasswordUser.email" class="form-control input-lg c-square" id="forget-email" placeholder="邮箱">
+
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" v-on:click = "forgetPassword()" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">提交</button>
+                        <a href="javascript:;" class="c-btn-forgot" data-toggle="modal" data-target="#login-form" data-dismiss="modal">返回登录</a>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer c-no-border">
+                <span class="c-text-account">还没有账号 ?</span>
+                <a href="javascript:;" data-toggle="modal" data-target="#signup-form" data-dismiss="modal" class="btn c-btn-dark-1 btn c-btn-uppercase c-btn-bold c-btn-slim c-btn-border-2x c-btn-square c-btn-signup">注册</a>
+            </div>
+        </div>
+    </div>
+</div><!-- END: CONTENT/USER/FORGET-PASSWORD-FORM -->
+<!-- BEGIN: CONTENT/USER/SIGNUP-FORM -->
+<div class="modal fade c-content-login-form" id="signup-form" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="c-font-24 c-font-sbold">创建账户</h3>
+                <h5>请填写以下信息</h5>
+                <form>
+                    <div class="form-group">
+                        <label for="signup-email" class="hide">邮箱</label>
+                        <p>{{emailMessage}}</p>
+                        <input type="email" v-on:change = "mouseMoveOut()" v-model = "signUser.email" class="form-control input-lg c-square" id="signup-email" placeholder="邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email" class="hide">手机号</label>
+                        <p>{{phoneMessage}}</p>
+                        <input type="text" v-on:change = "mouseMoveOutPhone()" v-model = "signUser.phone" class="form-control input-lg c-square" id="signup-phone" placeholder="手机号">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-username" class="hide">用户名</label>
+                        <input type="text" v-model = "signUser.userName" class="form-control input-lg c-square" id="signup-username" placeholder="用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-username" class="hide">密码</label>
+                        <input type="password" v-model = "signUser.password" class="form-control input-lg c-square" id="signup-password" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-fullname" class="hide">真实姓名</label>
+                        <input type="text" v-model = "signUser.realName" class="form-control input-lg c-square" id="signup-fullname" placeholder="真实姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-country" class="hide">性别</label>
+                        <select v-model = "signUser.sex" class="form-control input-lg c-square" id="signup-country" >
+                            <option value="1">男</option>
+                            <option value="2">女</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" v-on:click = "sign()" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">注册</button>
+                        <a href="javascript:;" class="c-btn-forgot" data-toggle="modal" data-target="#login-form" data-dismiss="modal">返回登录</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!-- END: CONTENT/USER/SIGNUP-FORM -->
+
+<!-- BEGIN: CONTENT/USER/LOGIN-FORM -->
+<div class="modal fade c-content-login-form" id="login-form" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="c-font-24 c-font-sbold">{{nowDate}}</h3>
+                <p>{{message}}</p>
+                <form>
+                    <div class="form-group">
+                        <label for="login-email" class="hide">手机号</label>
+                        <input type="text" v-on:change = "mouseMoveOut()" v-model = "loginUser.phone" class="form-control input-lg c-square" id="login-email" placeholder="手机号">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password" class="hide">密码</label>
+                        <input type="password" v-model = "loginUser.password" class="form-control input-lg c-square" id="login-password" placeholder="密码">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="c-checkbox">
+                            <input type="checkbox" value = "true" v-on:change = "tickTheRemember()" v-model = "tick" id="login-rememberme" class="c-check">
+                            <label for="login-rememberme" class="c-font-thin c-font-17">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                记住我
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button  v-on:click = "login()" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">登录</button>
+                        <a href="javascript:;" data-toggle="modal" data-target="#forget-password-form" data-dismiss="modal" class="c-btn-forgot">忘记密码</a>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer c-no-border">
+                <span class="c-text-account">还没有账号 ?</span>
+                <a href="javascript:;" data-toggle="modal" data-target="#signup-form" data-dismiss="modal" class="btn c-btn-dark-1 btn c-btn-uppercase c-btn-bold c-btn-slim c-btn-border-2x c-btn-square c-btn-signup">注册</a>
+            </div>
+        </div>
+    </div>
+</div><!-- END: CONTENT/USER/LOGIN-FORM -->
+<!--<button type="button" class="btn c-btn-green c-btn-square c-btn-bold c-btn-uppercase" data-toggle="modal" data-target=".bs-example-modal-sm">Launch Small modal</button>-->
+<!--$("#message").text("success");-->
+<!--操作-->
+<div id = "successOrFail" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content c-square">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <p>
+                 <span id = "message">正在操作中.....</span>
+                </p>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn c-theme-btn c-btn-border-2x c-btn-square c-btn-bold c-btn-uppercase" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

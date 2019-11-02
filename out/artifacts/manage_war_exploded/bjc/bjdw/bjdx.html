@@ -1,0 +1,166 @@
+ <div class="breadcrumbs" id="breadcrumbs"> 
+  <script type="text/javascript">
+   try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+ </script>
+ <ul class="breadcrumb">
+  <li> <i class="icon-home home-icon"></i> <a href="#">首页</a> </li>
+  <li> <a href="#">保健对象</a> </li>
+  <li class="active">保健对象</li>
+</ul>
+<!-- .breadcrumb -->
+
+
+  <!-- #nav-search --> 
+</div>
+<div class="page-content">
+  <div class="page-header">
+    <h1> 保健单位 <small> <i class="icon-double-angle-right"></i> 保健对象管理 </small> </h1>
+  </div>
+  <!-- /.page-header -->
+  
+  <div class="row">
+    <div class="col-xs-12"> 
+      <!-- PAGE CONTENT BEGINS -->
+      <div class="col-xs-12 col-sm-12">
+        <div class="widget-box">
+          <div class="widget-header">
+            <h4>搜索</h4>
+
+            <div class="widget-toolbar">
+            </div>
+          </div>
+
+          <div class="widget-body">
+            <div class="widget-main container">
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 姓名 </label>
+                 <div class="col-sm-3">
+                  <input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-10" />
+                </div>
+
+                 <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 保健单位 </label>
+                 <div class="col-sm-3">
+                  <input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-10" />
+                </div>
+
+                <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 状态</label>
+                <div class="col-sm-1">
+                  <select class="form-control" id="form-field-select-1">
+                                <option value="">不限</option>
+                                <option value="AR">启用</option>
+                                <option value="CA">停用</option>
+                  </select>
+                </div>
+              </div>
+              <div class="space-4"></div>
+              <div class="form-group text-right">
+                <button class="btn btn-success">
+                        <span class="icon-filter" aria-hidden="true"></span>                        
+                        搜索
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div><!-- /span -->
+
+      <table id="grid-table">
+      </table>
+      <div id="grid-pager"></div>
+      <script type="text/javascript">
+									var $path_base = "/";//this will be used in gritter alerts containing images
+								</script> 
+
+                <!-- PAGE CONTENT ENDS --> 
+              </div>
+              <!-- /.col --> 
+            </div>
+            <!-- /.row --> 
+          </div>
+          <!-- /.page-content -->
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:600px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeSub" onclick="closeButton()">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <!-- 保健单位信息添加-->
+                    </h4>
+                </div>
+                <div class="modal-body" >
+                    <!--fomr 样式-->
+
+
+
+                    <div class="form-group">
+                        <div style=" float: left ; height:30px ; width:150px; text-align:center; line-height:30px">
+                            <label style="float:right" for="realName">真实姓名：</label></div>
+                        <div>  <input type="text"  style=" width:350px " class="form-control" id="realName" placeholder="" name="realName">
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <div style=" float: left ;width:150px; height:30px ; text-align:center; line-height:30px">
+                            <label  style="float:right" for="password">密码：</label></div>
+                        <div>  <input type="password"  style=" width:350px "class="form-control" id="password" placeholder="" name="password"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div style=" float: left ; height:30px ; width:150px; text-align:center; line-height:30px">
+                            <label style="float:right" for="userName">用户名：</label></div>
+                        <div>  <input type="text"  style=" width:350px " class="form-control" id="userName" placeholder="" name="userName">
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <div style=" float: left ; height:30px ; width:150px; text-align:center; line-height:30px">
+                            <label style="float:right" for="hcDeptId">保健单位：</label></div>
+                        <div>  <input type="text"  style=" width:350px " class="form-control" id="hcDeptId" placeholder="" name="hcDeptId">
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <div style=" float: left ; height:30px ; width:150px; text-align:center; line-height:30px">
+                            <label style="float:right" for="phone">手机号：</label></div>
+                        <div>  <input type="text"  style=" width:350px " class="form-control" id="phone" placeholder="" name="phone">
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <div style=" float: left ; height:30px ; width:150px; text-align:center; line-height:30px">
+                            <label style="float:right" for="tel">座机号：</label></div>
+                        <div>  <input type="text"  style=" width:350px " class="form-control" id="tel" placeholder="" name="tel">
+                        </div>
+                    </div>
+                    <!---->
+
+                </div>
+                <div class="modal-footer">
+                    <div style=" position:relative; float: right; width:200px">
+                        <table width="150" border="0"  >
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-primary" onclick="saveOrUpdate()">保存
+                                    </button>
+                                </td>
+                                <td> <button type="button" class="btn btn-default" data-dismiss="modal" id="closeSubAdd">关闭
+                                </button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!-- end   MODEL-->
+
+         <!-- page specific plugin scripts --> 
+         <script src="assets/js/jqGrid/jquery.jqGrid.min.js"></script> 
+         <script src="assets/js/jqGrid/i18n/grid.locale-cn.js"></script> 
+         <script src="assets/js/bjdw/bjdw/bjdx.js"></script>

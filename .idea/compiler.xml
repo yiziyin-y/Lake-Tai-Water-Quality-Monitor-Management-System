@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="web" />
+        <module name="backend" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.7">
+      <module name="HEOS" target="1.5" />
+      <module name="web" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="HEOS" options="" />
+      <module name="web" options="-verbose -bootclasspath &quot;C:\Program Files\JetBrains\IntelliJ IDEA 2019.1.2\jre64/lib/rt.jar;C:\Program Files\JetBrains\IntelliJ IDEA 2019.1.2\jre64/lib/jce.jar&quot;" />
+    </option>
+  </component>
+</project>

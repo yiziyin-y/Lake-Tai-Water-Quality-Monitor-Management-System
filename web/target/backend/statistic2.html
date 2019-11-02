@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<!--
+Theme: JANGO - Ultimate Multipurpose HTML Theme Built With Twitter Bootstrap 3.3.7
+Version: 2.0.1
+Author: Themehats
+Site: http://www.themehats.com
+Purchase: http://themeforest.net/item/jango-responsive-multipurpose-html5-template/11987314?ref=themehats
+Contact: support@themehats.com
+Follow: http://www.twitter.com/themehats
+-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:v-bind="http://java.sun.com/jsf/composite" xmlns:v-on="http://java.sun.com/jsf/core">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+	<meta charset="utf-8" />
+	<title>Consultant</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<!--VueSliderStart-->
+	<link  href="assets/Vue/swiper-4.4.1/dist/css/swiper.css" rel="stylesheet" type="text/css">
+	<!--VueSliderEnd-->
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700&amp;subset=all'
+		  rel='stylesheet' type='text/css'>
+	<link href="assets/plugins/socicon/socicon.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/bootstrap-social/bootstrap-social.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/animate/animate.min.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN: BASE PLUGINS  -->
+	<link href="assets/plugins/revo-slider/css/settings.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/revo-slider/css/layers.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/revo-slider/css/navigation.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/owl-carousel/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/slider-for-bootstrap/css/slider.css" rel="stylesheet" type="text/css" />
+	<!-- END: BASE PLUGINS -->
+
+
+	<!-- BEGIN THEME STYLES -->
+	<link href="assets/demos/default/css/plugins.css" rel="stylesheet" type="text/css" />
+	<link href="assets/demos/default/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+	<link href="assets/demos/default/css/themes/default.css" rel="stylesheet" id="style_theme" type="text/css" />
+	<link href="assets/demos/default/css/custom.css" rel="stylesheet" type="text/css" />
+	<!-- END THEME STYLES -->
+
+	<link href="assets/demos/default/css/hotspot.css" rel="stylesheet" type="text/css" />
+
+	<link rel="shortcut icon" href="favicon.ico" />
+
+	<style>
+
+
+		.swiper-container {
+			width: 100%;
+			height: 100%;
+		}
+		.swiper-slide {
+			text-align: center;
+			font-size: 18px;
+			background: #fff;
+
+			/* Center slide text vertically */
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			-webkit-align-items: center;
+			align-items: center;
+		}
+
+		.c-logo:after {
+			width: 0 !important
+		}
+
+		.c-content-title-1>h3 {
+			color: #06b3b9;
+		}
+
+		.c-title>a {
+			color: #06b3b9;
+		}
+		ul li {
+			display: block;
+		}
+	</style>
+	<script language="JavaScript" type="text/javascript">
+        function method5(tableid) {
+            tableToExcel(tableid)
+        }
+        function Cleanup() {
+            window.clearInterval(idTmr);
+            CollectGarbage();
+        }
+        var tableToExcel = (function() {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',
+                base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+                format = function(s, c) {
+                    return s.replace(/{(\w+)}/g,
+                        function(m, p) { return c[p]; }) }
+            return function(table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+	</script>
+
+
+</head>
+
+<body class="c-layout-header-fixed c-layout-header-0-topbar">
+
+<!-- BEGIN: LAYOUT/HEADERS/HEADER-2 -->
+<!-- BEGIN: HEADER 2 -->
+<!--<header class="c-layout-header c-layout-header-6" data-minimize-offset="80" include-html="assets/heos/default/fragment/header.html">-->
+<!--</header>-->
+<!-- END: HEADER 2 -->
+<!-- END: LAYOUT/HEADERS/HEADER-2 -->
+
+<!-- BEGIN: CONTENT/USER/FORGET-PASSWORD-FORM -->
+<!--&lt;!&ndash;登录注册弹窗Start&ndash;&gt;-->
+<!--<div id = "form" include-html="assets/heos/default/fragment/form.html"></div>-->
+<!--&lt;!&ndash;登录注册弹窗End&ndash;&gt;-->
+<!-- BEGIN: PAGE CONTAINER -->
+
+<!--BodyStart-->
+
+<div class="c-content-title-1">
+	<h3 style="top:30px ;position: relative"  class="c-font-34 c-font-center c-font-bold c-font-uppercase c-margin-b-30">
+		太湖胥口湾环境水体监测信息系统
+	</h3>
+	<div class=" c-theme-bg"></div>
+	<br/><br/>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a id="syid" href="consultant.html">首页 </a></li>
+					<li class="dropdown">
+						<a data-toggle="collapse" data-target="#demo2"class="collapsed" aria-expanded="false">统计汇总<b class="caret"></b></a>
+						<ul id="demo2" class="menu collapse" aria-expanded="false">
+							<li><a href="statistic1.html">指标</a></li>
+							<li><a href="statistic2.html">采样点</a></li>
+						</ul>
+					</li>
+					<li><a id="bbid" href="monthReport.html">月度报表</a></li>
+					<li><a id="fbid" href="map.html">采样地区分布图</a></li>
+				</ul>
+			</div>
+			<!--左边菜单栏-->
+			<div id="show" class="col-sm-10">
+				<div id="selectOneConsultant" class="c-content">
+					<div id =  class="c-body">
+						<form class="form-inline">
+							<select id="BM123" class="form-control  c-square c-theme"  v-model="oneMenuIndex">
+								<option value = "-1">--查询一--</option>
+								<option value = "0">底栖生物</option>
+								<option value = "1">浮游动物密度</option>
+								<option value = "2">浮游动物多样性</option>
+								<option value = "3">浮游植物相关性</option>
+								<option value = "4">浮游植物细胞密度</option>
+								<option value = "5">胥口湾微生物群落</option>
+								<option value = "6">胥口湾底泥</option>
+								<option value = "7">胥口湾水质指标</option>
+							</select>
+							<select id="BM1" style="display:none" class="form-control  c-square c-theme"  v-model="oneMenuIndex">
+								<option value = "-1">--查询一--</option>
+								<option value = "0">底栖生物</option>
+								<option value = "1">浮游动物密度</option>
+								<option value = "2">浮游动物多样性</option>
+								<option value = "3">浮游植物相关性</option>
+								<option value = "4">浮游植物细胞密度</option>
+								<option value = "5">胥口湾微生物群落</option>
+								<option value = "6">胥口湾底泥</option>
+								<option value = "7">胥口湾水质指标</option>
+							</select>
+							<select id="BM2" style="display:none" class="form-control  c-square c-theme"  v-model="oneMenuIndex">
+								<option value = "-1">--查询一--</option>
+								<option value = "5">胥口湾微生物群落</option>
+								<option value = "6">胥口湾底泥</option>
+								<option value = "7">胥口湾水质指标</option>
+							</select>
+							<select id="BM3" style="display:none" class="form-control  c-square c-theme"  v-model="oneMenuIndex">
+								<option value = "-1">--查询一--</option>
+								<option value = "0">底栖生物</option>
+								<option value = "1">浮游动物密度</option>
+								<option value = "2">浮游动物多样性</option>
+								<option value = "3">浮游植物相关性</option>
+								<option value = "4">浮游植物细胞密度</option>
+							</select>
+							<select class="form-control  c-square c-theme" @change="configData(oneMenuIndex,twoMenuIndex)" v-model="twoMenuIndex">
+								<option value = "-1">--查询二--</option>
+								<option v-for="(optionName,index) in oneChildMenus" v-text="optionName" v-bind:value="index"></option>
+							</select>
+							<select class="form-control  c-square c-theme"  v-model="placeIndex">
+								<option value = "-1">--采样点--</option>
+								<option  v-for="optionName,index in myAreas" v-text="optionName['采样点位']" v-bind:value="index"></option>
+							</select>
+							<label>起始时间:</label>
+							<input type="date" v-model="startDate" >
+							<label>结束时间:</label>
+							<input type="date"  v-model="endDate">
+							<button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="staConsultant()"></i> 统计</button>
+							<button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" onclick="method5('tableExcel')"></i> 导出</button>
+						</form>
+						<div class="c-body">
+							<ul>
+								<br/><br/>
+								<!--表格Start-->
+								<div id = "consultantTable" >
+									<div class="c-body">
+										<div class="row" >
+											<div class="col-md-12" style="overflow: scroll" >
+												<table id="tableExcel" class="table table-hover" v-bind:style="{width: 130*tableDate.listShare.tHead.length+'px'}">
+													<thead>
+													<td  style="text-align: left" v-if="head!='id'&&head!='编号'&&head!='日期'" v-for="head in tableDate.listShare.tHead" v-text="head"></td>
+
+
+													</thead>
+													<tbody >
+													<tr  v-for="(body,index) in tableDate.listShare.tBody"  >
+
+														<td  v-if="index2!='id'&&index2!='编号'&&index2!='日期'" v-text = "value" v-for="(value,index2) in body">
+														</td>
+													</tr>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--表格End-->
+								<!--分页Start-->
+								<!--<div id = "bar"></div>-->
+								<!--分页End-->
+							</ul>
+
+						</div>
+					</div>
+				</div>
+				<div id="edit" class="col-sm-10" hidden="hidden">
+					<form class="form-horizontal" role="form" >
+						<!--产品名称-->
+						<div v-if="index != 'id'" v-for="(value,index) in table " class="col-md-5 ">
+							<label class="col-md-6 control-label" v-text="index"></label>
+							<div class="col-md-6">
+								<input type="text"  maxlength="50" v-model="table[index]" class="form-control  c-square c-theme"  >
+
+							</div>
+						</div>
+						<td><button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="editConsultant()"></i> 确认修改</button>
+						</td>
+						<td><button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="cancelEditConsultant()"></i> 返回</button>
+						</td>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- BEGIN: LAYOUT/BASE/BOTTOM -->
+<!-- BEGIN: CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="assets/global/plugins/excanvas.min.js"></script>
+<![endif]-->
+<script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
+<script src="assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
+<script src="assets/heos/default/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
+
+<!-- END: CORE PLUGINS -->
+
+<!-- BEGIN: LAYOUT PLUGINS -->
+<script src="assets/plugins/revo-slider/js/jquery.themepunch.tools.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/jquery.themepunch.revolution.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.slideanims.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.layeranimation.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.navigation.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.video.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.parallax.min.js" type="text/javascript"></script>
+<script src="assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+<script src="assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+<script src="assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="assets/plugins/smooth-scroll/jquery.smooth-scroll.js" type="text/javascript"></script>
+<script src="assets/plugins/typed/typed.min.js" type="text/javascript"></script>
+<script src="assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+<script src="assets/plugins/js-cookie/js.cookie.js" type="text/javascript"></script>
+<!-- END: LAYOUT PLUGINS -->
+
+<!-- BEGIN: THEME SCRIPTS -->
+<script src="assets/base/js/components.js" type="text/javascript"></script>
+<script src="assets/base/js/components-shop.js" type="text/javascript"></script>
+<script src="assets/base/js/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        App.init(); // init core
+    });
+</script>
+
+
+
+<script>
+    var index1=location.search.indexOf("?");
+    var rolenum=parseInt(location.search.substring(index1+1));
+    var rol1=Math.floor(rolenum/10);
+    var rol2=rolenum%10;
+    if (rol1==1)
+    {
+        $("#addbtn").removeAttr("disabled");
+    }
+    else if (rol1==2)
+    {
+        $("#addbtn").removeAttr("disabled");
+        $("#BM123").hide();
+        var str="#BM";
+        str=str+rol2;
+        $(str).show();
+    }
+    else {
+        $("#BM123").hide();
+        var str="#BM";
+        str=str+rol2;
+        $(str).show();
+        $("#addbtn").attr({"disabled":"disabled"});
+        $("#showTable").show();
+        $("#tableExcel2").hide();
+    }
+    $("ul li ul li a").each(function(){
+        var link = $(this).attr("href");
+        var new_link = link+"?"+rolenum;
+        $(this).attr("href",new_link);
+    });
+    var link = $("#syid").attr("href");
+    var new_link = link+"?"+rolenum;
+    $("#syid").attr("href",new_link);
+    var link = $("#bbid").attr("href");
+    var new_link = link+"?"+rolenum;
+    $("#bbid").attr("href",new_link);
+    var link = $("#fbid").attr("href");
+    var new_link = link+"?"+rolenum;
+    $("#fbid").attr("href",new_link);
+</script>
+<!-- END: THEME SCRIPTS -->
+
+<!-- BEGIN: PAGE SCRIPTS -->
+<script src="assets/heos/default/js/scripts/revo-slider/slider-4.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.parallax.min.js" type="text/javascript"></script>
+<script src="assets/heos/default/js/scripts/common/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        App.init(); // init core
+    });
+</script>
+<!-- END: THEME SCRIPTS -->
+
+<!-- BEGIN: PAGE SCRIPTS -->
+<script src="assets/demos/default/js/scripts/revo-slider/slider-4.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.parallax.min.js" type="text/javascript"></script>
+<script src='assets/plugins/flickity.pkgd.min.js'></script>
+<script src='assets/plugins/vue.js'></script>
+<script src="assets/demos/default/js/hotspot.js"></script>
+<script src="assets/heos/default/js/pageBar.js"></script>
+<script>
+
+
+
+</script>
+<script src="assets/heos/default/js/scripts/common/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+
+        initNavigation(""); // init core
+    });
+</script>
+<!-- END: PAGE SCRIPTS -->
+<!-- END: LAYOUT/BASE/BOTTOM -->
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    <!--二级菜单-->
+    var firstMenus = new Array();
+
+
+    firstMenus[0] = '密度';
+    firstMenus[1] = '生物量';
+
+    var secondMenus = new Array();
+
+    secondMenus[0] = '轮虫';
+    secondMenus[1] = '密度';
+    secondMenus[2] = '桡足类';
+    secondMenus[3] = '原生动物';
+
+    var thirdMenus = new Array();
+    thirdMenus[0] = '生物量';
+    thirdMenus[1] = '轮虫';
+    thirdMenus[2] = '数据总表';
+    thirdMenus[3] = '桡足类';
+    thirdMenus[4] = '原生动物';
+    thirdMenus[5] = '枝角类';
+
+
+
+    var fourMenus = new Array();
+
+    fourMenus[0] = '硅藻门';
+    fourMenus[1] = '甲藻门';
+    fourMenus[2] = '金藻门';
+    fourMenus[3] = '蓝藻门';
+    fourMenus[4] = '裸藻门';
+    fourMenus[5] = '绿藻门';
+    fourMenus[6] = '隐藻门';
+    fourMenus[7] = '生物量';
+    fourMenus[8] = '数据总表';
+
+    var fiveMenus = new Array();
+    fiveMenus[0] = '细胞密度';
+    fiveMenus[1] = '硅藻门';
+    fiveMenus[2] = '甲藻门';
+    fiveMenus[3] = '金藻门';
+    fiveMenus[4] = '蓝藻门';
+    fiveMenus[5] = '裸藻门';
+    fiveMenus[6] = '绿藻门';
+    fiveMenus[7] = '隐藻门';
+
+
+    var sixMenus = new Array();
+    sixMenus[0] = 'archaea';
+    sixMenus[1] = 'bacteria';
+    sixMenus[2] = '数据总表';
+
+    var sevenMenus = new Array();
+    sevenMenus[0] = '底泥';
+
+    var eightMenus = new Array();
+    eightMenus[0] = '磺胺类抗生素的含量';
+    eightMenus[1] = '数据总表';
+    eightMenus[2] = '新型烟碱类农药含量';
+    eightMenus[3] = '有机磷酸酯的含量';
+
+
+    var store = {
+        debug: true,
+        state: {
+            //获取的所有记录
+            listShare: [],
+            select: true,
+        },
+
+        setMessageAction (newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue)
+            this.state.listShare = newValue
+        },
+        clearMessageAction () {
+            if (this.debug) console.log('clearMessageAction triggered')
+            this.state.listShare = ''
+        }
+    }
+
+    // 编辑
+    var eidtTable = new Vue({
+        el:"#edit",
+        data(){
+            return{
+                table: {},
+            }
+        },
+        methods:{
+            //转换Vue数据
+            exchangeVue: function(data){
+                var result = {};
+                for(index in data){
+                    result[index] = data[index]
+                }
+                return result;
+            },
+            //完成修改
+            editConsultant: function(){
+                _this = this;
+
+                // confirm(function())
+                var data = this.exchangeVue(this.table);
+                var url = "table/modifyTable";
+                url = url + selectOneConsultant.oneMenuIndex;
+                url = url +  selectOneConsultant .twoMenuIndex;
+
+
+                $.ajax({
+                    type: "POST",
+                    url:url,
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 1){
+                            $("#edit").hide("slow");
+                            $("#show").show("slow");
+                            alert("success");
+                            _this.selectConsultantByName();
+                        }
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+
+                });
+
+            },
+            //取消修改
+            cancelEditConsultant: function(){
+                $("#edit").hide("slow");
+                $("#show").show("slow");
+            },
+            save: function () {
+
+
+            }
+        }
+    });
+    //按照酒店类型查找
+    var selectOneConsultant = new Vue({
+        el: "#selectOneConsultant",
+        data(){
+            return{
+                placeIndex:-1,
+                place:undefined,
+                oneMenuIndex: -1,
+                twoMenuIndex: -1,
+                threeMenuIndex: -1,
+                endDate: undefined,
+                startDate: undefined,
+                tableDate: store.state,
+                myAreas:[],
+            }
+        },
+        created: function(){
+            var data = {};
+            var url = 'table/oneMenus';
+            data.oneMenuIndex = 0;
+            data.twoMenuIndex = 0;
+            data.startDate = undefined;
+            data.endDate = undefined;
+            postPageInfo(data,url);
+            initPageBar();
+        },
+
+        computed: {
+            oneChildMenus: function(){
+                var menus = new Array();
+                if(this.oneMenuIndex == -1){
+                    return menus;
+                }
+                if(this.oneMenuIndex == 0){
+                    return firstMenus;
+                }
+                if(this.oneMenuIndex == 1){
+                    return secondMenus;
+                }
+                if(this.oneMenuIndex == 2){
+                    return thirdMenus;
+                }
+                if(this.oneMenuIndex == 3){
+                    return fourMenus;
+                }
+                if(this.oneMenuIndex == 4){
+                    return fiveMenus;
+                }
+                if(this.oneMenuIndex == 5){
+                    return sixMenus;
+                }
+                if(this.oneMenuIndex == 6){
+                    return sevenMenus;
+                }
+                if(this.oneMenuIndex == 7){
+                    return eightMenus;
+                }
+            },
+            twoChildMenus: function () {
+
+            }
+        },
+        methods: {
+            //地址联动
+            configData (index1,index2) {
+                _this = this;
+                var data = {};
+                data.oneMenuIndex=index1;
+                data.twoMenuIndex=index2;
+                $.ajax({
+                    type: "POST",
+                    url:"table/getArea",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        selectOneConsultant.myAreas=result.data.rows.areaList;
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+
+                });
+            },
+            //修改
+            editValue: function(body){
+                $("#show").hide("slow");
+                $("#edit").show("slow");
+                eidtTable.table = body;
+            },
+            //增加
+
+            deleteConsultantByName: function(id){
+                _this = this;
+                var data = {};
+                data.oneMenuIndex=this.oneMenuIndex;
+                data.twoMenuIndex=this.twoMenuIndex;
+                data.rowId = id;
+                // confirm(function())
+                $.ajax({
+                    type: "POST",
+                    url:"table/deleteTable" ,
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 1){
+                            alert("success");
+                            _this.selectConsultantByName();
+                        }
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+
+                });
+
+            },
+            //统计
+            staConsultant: function () {
+                var url = 'table/staMenu2';
+                var data = {};
+                data.place=selectOneConsultant.myAreas[this.placeIndex]['采样点位'];
+                data.oneMenuIndex = this.oneMenuIndex;
+                data.twoMenuIndex = this.twoMenuIndex;
+                data.startDate = this.startDate;
+                data.endDate = this.endDate;
+                postPageInfo(data,url);
+                initPageBar();
+            },
+            selectConsultantByName: function () {
+                var url = 'table/oneMenus';
+                var data = {};
+                data.oneMenuIndex = this.oneMenuIndex;
+                data.twoMenuIndex = this.twoMenuIndex;
+                data.startDate = this.startDate;
+                data.endDate = this.endDate;
+                postPageInfo(data,url);
+                //initPageBar();
+            },
+
+        },
+
+    });
+
+
+</script>
+</body>
+
+</html>

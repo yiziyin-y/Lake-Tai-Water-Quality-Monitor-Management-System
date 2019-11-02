@@ -1,0 +1,789 @@
+
+
+<div id="goodTypeShow" style="width: inherit" xmlns:v-on="http://java.sun.com/jsf/composite"
+     xmlns:v-bind="http://java.sun.com/jsf/core" xmlns:v-on="http://java.sun.com/jsf/facelets"
+     xmlns:v-on="http://java.sun.com/jsf/html" xmlns:v-on="http://xmlns.jcp.org/jsf/core"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/composite" xmlns:v-bind="http://xmlns.jcp.org/jsf/html"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+    <div id = "searchGroups" class="c-body">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索条件</h4>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="name" class="col-md-5 control-label">分类名称</label>
+                <div class="col-md-6 ">
+                    <input id="name" style="width: 150px" v-model="searchByName"/>
+
+                </div>
+            </div>
+
+            <div class="col-md-4" style="width: 25.33%">
+                <label for="select" class="col-md-6 control-label">分类级别</label>
+                <div class="col-md-6 control-label">
+                    <select class="singleSelect" id="select">
+                        <option select="selected">选择类型查询</option>
+                        <option value="1">大类</option>
+                        <option value="2">分类</option>
+                        <option value="3">类型</option>
+
+
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <label for="code" class="col-md-5 control-label">编号查询</label>
+                <div class="col-md-6">
+                    <input id="code" style="width: 150px" v-model="code"/>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="col-md-12" style="text-align: right; width:77%">
+                <h6>&nbsp;</h6>
+                <button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click=" selectGoodType()"><i class="fa fa-search"></i> 搜索</button>
+                <h6>&nbsp;</h6>
+                <button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toAddGoodTypePage()" style="width: 91.25px;"><i class="fa fa-plus" ></i>新增</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索结果</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="c-body">
+        <ul>
+            <div id = "groupShow" class="c-content">
+                <div class="c-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                <td  style="text-align: left">商品类别名</td>
+                                <td  style="text-align: left">分类级别</td>
+                                <td  style="text-align: left">备注</td>
+                                <td  style="text-align: left">编号</td>
+                                <td  style="text-align: left">父类名</td>
+                                <td  style='text-align: left;' colspan="2">操作</td>
+                                </thead>
+                                <tbody >
+                                <tr v-for="(goodType,index) in goodTypes.listShare"  v-bind:id='goodTypes.listShare.id'>
+                                    <td>{{goodType.name}}</td>
+                                    <td v-if="goodType.type == 1">大类</td>
+                                    <td v-if="goodType.type == 2">分类</td>
+                                    <td v-if="goodType.type == 3">类型</td>
+                                    <td>{{goodType.remark}}</td>
+                                    <td>{{goodType.code}}</td>
+                                    <td>{{goodType.parentName}}</td>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toEditGoodTypePage(goodType)"><i class="fa fa-pencil"></i> 编辑</button>
+                                        &nbsp;
+                                        <button type="button"  class="btn btn-danger c-btn-square" v-on:click="delectGoodType(goodType)"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+
+</div>
+<div id = "addGoodType" hidden="true">
+    <div class="modal-header" style="border: 0px">
+        <a href="javascript:;" v-on:click="togoodTypeShowPage()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">新增</div>
+
+        </a>
+
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="addGoodTypeForm">
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">类别名称:&nbsp;</label>
+                <div class="col-md-3">
+                    <input type="text"  maxlength="50" v-model="addGoodTypeList.name" class="form-control  c-square c-theme"  >
+                    <span style="color: red">{{checkName}}</span>
+                </div>
+            </div>
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">分类级别:&nbsp;</label>
+                <div class="col-md-6">
+                    <select class="form-control  c-square c-theme singleSelect" name="selectKind" type="text" v-mode="selectKind"
+                            id="selectKind" style="height: inherit">
+                        <option value="-1" option="selected" >请选择分类级别</option>
+                        <option >大类</option>
+                        <option>分类</option>
+                        <option>类型</option>
+
+
+                    </select>
+                </div>
+            </div>
+            <!--选择父类界别编号-->
+            <div class="from-group" style="padding-bottom: 50px" id="parentType" hidden="true">
+                <label class="col-md-4 control-label">父类级别:&nbsp;</label>
+                <div class="col-md-2" id="bigTypeShow" hidden="true" style="height: inherit;width: 140px">
+
+                    <select id = "bigType"  name="state"  >
+                        <option selected = "selected">--选择大类--</option>
+                        <option v-for="(type,index) in bigType" v-bind:value="index" v-text="type.name"></option>
+                    </select>
+                </div>
+                <div class="col-md-2" id="middleType" hidden="true" style="height: inherit;width: 140px" >
+                    <select  id="midType" name="state" >
+                        <option selected = "selected">--选择分类--</option>
+                        <option v-for="(ty,index) in midType" v-bind:value="index" v-text="ty.name" ></option>
+
+
+                    </select>
+                </div>
+            </div>
+            <!--商品类型编号-->
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">类型编号:&nbsp;</label>
+                <div class="col-md-3">
+                    <input type="text"  maxlength="50" v-model="addGoodTypeList.code" class="form-control  c-square c-theme"  >
+
+                </div>
+            </div>
+            <!--商品类型备注-->
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">分类备注:&nbsp;</label>
+                <div class="col-md-6">
+                    <textarea    class="form-control  c-square c-theme" v-model="addGoodTypeList.remark" />
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div  class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary"   @click="sureAddGoodType()" >保&nbsp;&nbsp;存
+        </button>
+        <button type="button"  class="btn btn-primary" @click="togoodTypeShowPage()">关&nbsp;&nbsp;闭
+        </button>
+
+    </div>
+
+</div>
+
+<div id="editGoodType" hidden="true">
+    <div class="modal-header" style="border: 0px">
+        <a href="javascript:;" v-on:click="toGoodTypePage()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">编辑</div>
+
+        </a>
+
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="editGoodTypeForm">
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">类别名称:&nbsp;</label>
+                <div class="col-md-3">
+                    <input type="text"  maxlength="50" v-model="editGoodTypeList.name" class="form-control  c-square c-theme"  >
+                    <span style="color: red">{{IsNullName}}</span>
+                </div>
+            </div>
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">所属级别:&nbsp;</label>
+                <div class="col-md-6" style="line-height: 38px">
+                    <span >{{type}}</span>
+                </div>
+            </div>
+
+            <!--选择父类界别编号-->
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">修改级别:&nbsp;</label>
+                <div class="col-md-2" id="editBigTypeShow" style="height: inherit;width: 140px" >
+
+                    <select id = "editBigType"  name="state"  >
+                        <option selected = "selected">--选择大类--</option>
+                        <option v-for="(type,index) in editBigType" v-bind:value="index" v-text="type.name"></option>
+                    </select>
+                </div>
+                <div class="col-md-2" id="editMiddleType"  style="height: inherit;width: 140px" >
+
+                    <select  id="editMidType" name="state" >
+                        <option selected = "selected">--选择分类--</option>
+                        <option v-for="(ty,index) in editMidType" v-bind:value="index"  v-text="ty.name"></option>
+
+
+                    </select>
+                </div>
+            </div>
+            <!--商品类型编号-->
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">类型编号:&nbsp;</label>
+                <div class="col-md-6" style="line-height:38px">
+
+                    <span >{{ bigTypeCode}}</span>
+                    <span>{{midTypeCode}}</span>
+                </div>
+            </div>
+            <!--商品类型备注-->
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">分类备注:&nbsp;</label>
+                <div class="col-md-6">
+                    <textarea  class="form-control  c-square c-theme" v-model="editGoodTypeList.remark" />
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div  class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary"   v-on:click="sureEditGoodType()" >保&nbsp;&nbsp;存
+        </button>
+        <button type="button"  class="btn btn-primary" v-on:click="toGoodTypePage()">取&nbsp;&nbsp;消
+        </button>
+
+    </div>
+
+</div>
+
+
+<div id="bar"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="assets/heos/default/js/pageBar.js"></script>
+<script>
+    var name = ""
+    var type = 1;
+    var parentId = 0;
+
+    var store = {
+        debug: true,
+        state: {
+            //获取的所有记录
+            listShare: [],
+
+        },
+
+        setMessageAction (newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue)
+            this.state.consultantlistShare = newValue
+        },
+        clearMessageAction () {
+            if (this.debug) console.log('clearMessageAction triggered')
+            this.state.consultantlistShare = ''
+        }
+    }
+    var goodTypeShow = new Vue({
+        el:"#goodTypeShow",
+        data:{
+            checkName:"",
+            goodTypes:store.state,
+            _this : this,
+            select:"",
+            searchByName:"",
+            name:"",
+            type:-1,
+            parentId:-1,
+            code:"",
+            goodTypeLevel:""
+
+        },
+        created : function(){
+            var data = {};
+            data.name = ""
+            data.type =0;
+            data.parentId = -1;
+            //url查询
+            var url = "goodType/getAllGoodTypes";
+            //查询条件
+            //派出pageIndex oageSize
+            //传条件
+            postPageInfo(data,url);
+            initPageBar();
+
+        },
+        methods: {
+            getAllGoodTypes: function () {
+                var data = {};
+                _this = this;
+                data.name = _this.name;
+                data.type = _this.type;
+                data.parentId = _this.parentId;
+
+                //url查询
+                var url = "goodType/getAllGoodTypes";
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                postPageInfo(data, url);
+                initPageBar();
+
+            },
+            toAddGoodTypePage: function () {
+                $("#addGoodType").show();
+                $("#goodTypeShow").hide();
+                $("#bar").hide();
+
+            },
+            toEditGoodTypePage: function (goodType) {
+                $("#editGoodType").show();
+                $("#goodTypeShow").hide();
+                $("#bar").hide();
+                editGoodType.editGoodTypeList = goodType;
+
+                editGoodType.getTypeLevel()
+            },
+            delectGoodType: function (goodType) {
+                if (!confirm("确定删除？")) {
+                    return;
+                }
+                var data = {};
+                data.id = goodType.id;
+
+                $.ajax({
+                    type: "POST",
+                    url: "goodType/delectGoodType",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        alert("success");
+                        // 需要重新再次查询数据库
+                        groupsShow.getAllGroups();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            },
+            selectGoodType: function () {
+                var data = {}
+                data.type =0;
+                if (goodTypeShow.select == "1") {
+                    data.type = 1;
+                };
+                if (goodTypeShow.select == "2") {
+                    data.type = 2;
+                };
+                if (goodTypeShow.select == "3") {
+                    data.type = 3;
+                };
+                if (goodTypeShow.code !=null){
+                    this.selectGoodTypeByCode();
+
+                }
+                data.name = goodTypeShow.searchByName;
+
+                var url = "goodType/getAllGoodTypes";
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                postPageInfo(data, url);
+                initPageBar();
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+
+                goodTypeShow.searchByName=null;
+            },
+            selectGoodTypeByCode:function () {
+                var data = {}
+                data.code =goodTypeShow.code;
+                var url = "goodType/getTypesByCode";
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                postPageInfo(data, url);
+                initPageBar();
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                goodTypeShow.code=null;
+
+            }
+
+
+        }
+    });
+    var addGoodType = new Vue({
+        el:"#addGoodType",
+        data:{
+            selectKinds:'',
+            bigType:[],
+            midType:[],
+            addGoodTypeList:[],
+            bigTypeIndex:-1,
+            midTypeIndex:-1,
+            checkName:"",
+            selectKind:""
+
+
+
+        },
+        created : function(){
+           this.getAllBigType();
+
+
+
+        },
+        methods:{
+            getAllBigType:function(){
+                var data = {};
+                data.name ="";
+                data.parentId = 0;
+                data.type =1;
+                _this =this;
+                $.ajax({
+                    type:"POST",
+                    url:"goodType/getAllBigTypes",
+                    dataType:"json",
+                    data:data,
+                    success:function(result){
+
+                        _this.bigType = result.data.rows;
+                        _this.$nextTick(function () {
+                            $('#bigType').select2();
+                             $('#midType').select2();
+                              $('#minType').select2();
+
+
+                        })
+
+                    },
+                    error:function () {
+
+                    }
+                });
+            },
+            getAllMidType:function(){
+                var data = {};
+                data.name =""
+                data.type =2;
+                _this =this;
+                $.ajax({
+                    type:"POST",
+                    url:"goodType/getAllMidTypes",
+                    dataType:"json",
+                    data:data,
+                    success:function(result){
+
+                        _this.midType = result.data.rows;
+                        _this.$nextTick(function () {
+                            $('#migType').select2();
+                            //   $('#midType').select2();
+                            //   $('#minType').select2();
+
+
+                        })
+
+                    },
+                    error:function () {
+
+                    }
+                });
+            },
+            togoodTypeShowPage:function(){
+                $("#goodTypeShow").show();
+                $("#addGoodType").hide();
+                $("#bar").show();
+                addGoodType.addGoodTypeList.name=null;
+                addGoodType.addGoodTypeList.remark=null;
+                addGoodType.addGoodTypeList.code=null;
+                addGoodType.addGoodTypeList.selectKinds=null;
+                $("#selectKind").val(-1);
+                $('#selectKind').trigger('change');
+
+            },
+            sureAddGoodType:function () {
+
+                var data ={}
+                if(this.addGoodTypeList.name == null){
+                    this.checkName="类型名称不能为空";
+                    return ;
+                }
+                if (addGoodType.selectKinds =="大类"){
+                    data.type = 1;
+                    data.parentId =0;
+
+                    data.code=this.addGoodTypeList.code;
+                }
+                if (addGoodType.selectKinds =="分类") {
+                    data.parentId = addGoodType.bigTypeIndex;
+                    data.type =2;
+                    data.code=this.addGoodTypeList.code;
+                }
+                if (addGoodType.selectKinds =="类型") {
+                    data.parentId = addGoodType.midTypeIndex;
+
+                    data.type =3;
+                    data.code=this.addGoodTypeList.code;
+                }
+                data.name = addGoodType.addGoodTypeList.name;
+                data.remark = addGoodType.addGoodTypeList.remark;
+                $.ajax({
+                    type: "POST",
+                    url: "goodType/addGoodType",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 1){
+
+                            giveMessage("操作成功");
+                            addGoodType.addGoodTypeList.name=null;
+                            addGoodType.addGoodTypeList.remark=null;
+                            addGoodType.addGoodTypeList.code=null;
+                            goodTypeShow.getAllGoodTypes();
+                        }else{
+                            alert(result.message);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#addGoodType").hide();
+                $("#goodTypeShow").show();
+                $("bar").show();
+            },
+
+
+
+
+        }
+    });
+    var editGoodType = new Vue({
+        el:"#editGoodType",
+        data:{
+            editGoodTypeList:[],
+            editBigType:[],
+            editMidType:[],
+            bigTypeIndex:-1,
+            midTypeIndex:-1,
+            IsNullName:"",
+            type:"",
+            bigTypeCode:'',
+            midTypeCode:'',
+            code:""
+        },
+        created:function(){
+            this.getAllBigType();
+
+        },
+
+        methods:{
+            toGoodTypePage:function() {
+                $("#goodTypeShow").show();
+                $("#editGoodType").hide();
+                $("#bar").show();
+                //console.log(editGoodType.editBigType);
+            },
+
+            //所属jibie
+            getTypeLevel:function(){
+                var type = editGoodType.editGoodTypeList.type;
+                if (type ==1){
+                    this.type ="大类";
+                } else if(type ==2){
+                    this.type ="分类";
+                }else {
+                    this.type ="类型";
+                }
+            },
+            //huoqu 获取类型上一级
+
+            getAllBigType:function(){
+                var data = {};
+                data.name ="";
+                data.parentId = 0;
+                data.type =1;
+                _this =this;
+                $.ajax({
+                    type:"POST",
+                    url:"goodType/getAllBigTypes",
+                    dataType:"json",
+                    data:data,
+                    success:function(result){
+                        _this.editBigType = result.data.rows;
+                        _this.$nextTick(function () {
+                            $('#editBigType').select2();
+
+
+                        });
+
+
+                    },
+                    error:function () {
+                    }
+                });
+            },
+            sureEditGoodType:function () {
+                var data ={};
+                var bigIndex = editGoodType.bigTypeIndex;
+                var midIndex = editGoodType.midTypeIndex;
+                if(editGoodType.editGoodTypeList.name == null){
+                    this.IsNullName="类型名称不能为空";
+                    return ;
+                }
+                if (midIndex ==-1){
+                    data.type = 2;
+                    data.parentId =bigIndex;
+                    // alert()
+                    // data.code=this.addGoodTypeList.code;
+                }
+                if (midIndex  != -1) {
+                    data.parentId = midIndex;
+                    alert(midIndex)
+                    data.type =3;
+                    // data.code=this.addGoodTypeList.code;
+                }
+                data.id = editGoodType.editGoodTypeList.id;
+                data.name = editGoodType.editGoodTypeList.name;
+                data.remark = editGoodType.editGoodTypeList.remark;
+                $.ajax({
+                    type: "POST",
+                    url: "goodType/editGoodType",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 1){
+                            alert("success")
+                            goodTypeShow.getAllGoodTypes();
+                        }else{
+                            alert(result.message);
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#editGoodType").hide();
+                $("#goodTypeShow").show();
+                $("#bar").show();
+            }
+
+        }
+    });
+    $('#selectKind').change(function(){
+        var selectKinds = $(this).children('option:selected').val();
+        addGoodType.selectKinds = selectKinds;
+        if (selectKinds =="大类") {
+            $("#parentType").hide();
+        }
+        if (selectKinds =="分类"){
+            $("#parentType").show();
+            $("#bigTypeShow").show();
+            $("#middleType").hide();
+
+            addGoodType.getAllBigType();
+        }
+        if (selectKinds =="类型") {
+            $("#parentType").show();
+            $("#bigTypeShow").show();
+            $("#middleType").show();
+            addGoodType.getAllBigType();
+
+        }
+
+
+    });
+    $('#bigType').change(function () {
+        var data ={};
+        var bigIndex = $(this).children('option:selected').val();//指针
+        addGoodType.bigTypeIndex =addGoodType.bigType[bigIndex].id;//父类指针
+
+
+        data.parentId = addGoodType.bigTypeIndex;
+        data.type = 2;
+
+
+        $.ajax({
+            type:"POST",
+            url:"goodType/getAllMidTypes",
+            dataType:"json",
+            data:data,
+            success:function(result){
+                addGoodType.midType = result.data.rows;
+                $('#midType').select2();
+            },
+            error:function () {
+
+            }
+        });
+
+
+
+
+    });
+    $("#midType").change(function () {
+
+        var bigIndex = $(this).children('option:selected').val();//指针
+        addGoodType.midTypeIndex =addGoodType.midType[bigIndex].id;//父类指针
+
+    });
+    $("#editBigType").change(function () {
+        var data = {};
+        var bigIndex = $(this).children('option:selected').val();//指针
+        editGoodType.bigTypeIndex = editGoodType.editBigType[bigIndex].id;//父类指针
+        editGoodType.bigTypeCode = editGoodType.editBigType[bigIndex].code;
+        data.parentId = editGoodType.bigTypeIndex;
+        data.type = 2;
+        $.ajax({
+            type: "POST",
+            url: "goodType/getAllMidTypes",
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                editGoodType.editMidType = result.data.rows;
+                $('#editMidType').select2();
+            },
+            error: function () {
+
+            }
+        });
+
+    });
+    $("#editMigType").change(function () {
+        var bigIndex = $(this).children('option:selected').val();//指针
+        editGoodType.midTypeIndex =editGoodType.editMidType[bigIndex].id;//父类指针
+        editGoodType.midTypeCode = editGoodType.editMidType[bigIndex].code;
+
+    });
+    $("#select").change(function () {
+        var bigIndex = $(this).children('option:selected').val();//选择查询类型
+        goodTypeShow.select = bigIndex;
+
+
+
+    });
+
+    function giveMessage(message) {
+        $.Hmodal({
+            height:"420px",
+            width:"600px",
+            body:"<div><form>" +
+            "<div>"+message+"</div>" +
+            "<div class='h-modal-footer'>" +
+            "<button  <button type=\"button\" class= 'btn c-theme-btn c-btn-border-2x c-btn-square c-btn-bold c-btn-uppercase cancel'>关闭</button>" +
+            " <button type=\"button\" class='btn c-theme-btn c-btn-border-2x c-btn-square c-btn-bold c-btn-uppercase   submit'>提交</button></div>" +
+            "</form></div>",
+
+        })
+    }
+</script>
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+
+    <!-- !!!! Driver Class Path !!!! -->
+    <classPathEntry location="D:\JAVA_DEV\libs\mysql-connector-java-5.1.12.jar"/>
+    <!-- targetRuntime:生成代码的运行环境-->
+    <context id="context" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- !!!! Database Configurations !!!! -->
+        <!--  <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                          connectionURL="jdbc:oracle:thin://@localhost:1521:orcl"
+                          userId="tq" chs 2afwxew2sde
+                          password="tq123"/>-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://139.196.14.178:3306/heos"
+                        userId="root" password="clarkdev"/>
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- !!!! Model Configurations !!!! -->
+        <javaModelGenerator targetPackage="com.glyk.heos.dal.dao" targetProject="src">
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- !!!! Mapper XML Configurations !!!! -->
+        <sqlMapGenerator targetPackage="com.glyk.heos.dal.mapping" targetProject="src">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- !!!! Mapper Interface Configurations !!!! -->
+        <javaClientGenerator targetPackage="com.glyk.heos.dal.dao" targetProject="src" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+
+        <!-- !!!! Table Configurations !!!! -->
+        <!--med_result_v :体检报告视图详情
+        med_package_group_v :套餐详细
+        -->
+        <table tableName="brand" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true"/>
+
+
+    </context>
+</generatorConfiguration>

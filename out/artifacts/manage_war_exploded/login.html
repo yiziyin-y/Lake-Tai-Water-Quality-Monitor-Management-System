@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script>
+	function login(){
+		var userName=$('#userName').val();
+		if(userName=="bjc")
+			window.location.href="index_bjc.html";
+		else
+			if(userName=="tjzx")
+			window.location.href="index_tjzx.html";
+		else
+			if(userName=="bjdw")
+			window.location.href="index_bjdw.html";
+	}
+</script>
+</head>
+<body>
+<div>
+  <table width="1200" height="125" border="0" align="center" style="color: #fe8a1a">
+    <tbody>
+      <tr>
+        <td><span style="font-weight: bolder; font-size: 36px;">苏州市干部健康云平台</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="background-color: #f0f2eb">
+  <table width="1200" height="580" border="0" align="center">
+    <tbody>
+      <tr>
+        <td width="574"><img src="assets/images/ypt.png" width="574" height="398" alt=""/></td>
+        <td align="center">
+        
+           <div style=" width:400px; height:400px;
+            border-radius:15px;  
+              -moz-border-radius: 15px; 
+    -webkit-border-radius: 15px; 
+            
+                  background: #FFF">
+       <!--登录form-->
+       <!--欢迎-->
+          <div style="height:60px; width:400px; vertical-align: bottom">
+        <div style="position:relative; top:40px"> <font size="6" color="#fe8a1a" style="font-weight:bold;" >欢迎登陆</font></div>
+          </div>
+       <br>
+       <br>
+        <br>
+	<!--欢迎end-->
+    
+		
+	 	<div class="input-group input-group-lg" style="width:400px"> 
+			<div style=" float:left; width:110px; height:50px; text-align:right; line-height:40px;"><font style="font-family: '黑体'">用户名&nbsp;: </font> </div>
+			<div style=" float:right; width:280px">
+            <input type="text" style="width:200px; height:45px; float:left;border-radius:6px;  
+              -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px; 
+" class="form-control" placeholder="请输入用户名" id="userName"></div>
+		</div><br>       
+         <div class="input-group input-group-lg "  style="width:400px">
+			<div style=" float:left; width:110px; height:50px; text-align:right;line-height:40px;"><font style=" font-family:'黑体'">密&nbsp;&nbsp;码&nbsp;:</font></div>
+            <div style="float:right; width:280px">
+			<input type="text" style="width:200px; height:45px ;float:left;border-radius:6px;  
+              -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px;" class="form-control" placeholder="请输入密码"></div>
+		</div><br> 
+         <div class="input-group input-group-lg "  style="width:275px">
+			 <button type="button"  class="btn btn-primary"  style="width:275px; position:relative; left:-20px; height:50px; border:hidden; background:#F93"; 
+    data-toggle="button" onclick="login()"> <font size="+2">登 &nbsp;&nbsp;录</font>
+</button>
+		</div><br> 
+       
+            <div class="input-group input-group-lg "  style="width:400px">
+		<div style=" float:left; width:200px; text-align:center; ">
+       <a style="text-decoration:none"  href="#"> <font size="-1" color="#0033CC">忘了密码</font> </a></div>
+        <div style="text-align:center"><font size="-1">没有账号?请先<a href="#" style="text-decoration:none"><span  style="color:#0033CC">注册</span></a></font></div>
+		</div> 
+       <!--登录form-->
+		<div><hr style="width:350px"></div>
+           </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

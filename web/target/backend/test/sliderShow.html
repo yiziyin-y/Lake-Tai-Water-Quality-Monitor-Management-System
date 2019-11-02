@@ -1,0 +1,585 @@
+<div id = "table" style="width: inherit" xmlns:v-on="http://java.sun.com/jsf/composite"
+     xmlns:v-bind="http://java.sun.com/jsf/core" xmlns:v-on="http://java.sun.com/jsf/facelets"
+     xmlns:v-on="http://java.sun.com/jsf/html" xmlns:v-on="http://xmlns.jcp.org/jsf/core"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/composite" xmlns:v-bind="http://xmlns.jcp.org/jsf/html"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/passthrough">
+
+
+    <div  class="c-body">
+        <div class="container">
+            <div class="col-md-12" style="text-align: right; width: 70%">
+                <h6>&nbsp;</h6>
+                <button type="button" v-on:click="addThePicture()"   class="btn btn-info c-btn-square c-btn-uppercase"><i class="fa fa-plus"></i> 新增</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索结果</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c-body">
+        <ul>
+            <div id = "slideShow" class="c-content">
+                <div class="c-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                <td  style="text-align: left">创建时间</td>
+                                <td  style="text-align: left">链接</td>
+                                <td  style='text-align: left;' colspan="2">操作</td>
+                                </thead>
+                                <tbody >
+                                <tr v-for="(picture,index) in pictureList.listShare"  v-bind:id='pictureList.listShare.id'>
+                                    <td>{{picture.creationDate}}</td>
+                                    <td>{{picture.link}}</td>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click = 'seeThePicture(picture)' ><i class="glyphicon glyphicon-eye-open">查看</i></button>
+                                        &nbsp;
+                                        <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click='editThePicture(picture)' ><i class="fa fa-pencil"></i> 编辑</button>
+                                        &nbsp;
+                                        <button type="button"  class="btn btn-danger c-btn-square" v-on:click='deleteThePicture(picture)'><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+
+</div>
+<!--表格结束-->
+<!--添加轮播图 开始-->
+    <div id = "addSilderShow" hidden="true">
+        <div class="modal-header" style="border: 0px">
+
+            <a href="javascript:;" v-on:click="toTable()" style="text-align: center">
+                <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+                <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">添加</div>
+
+            </a>
+
+        </div>
+        <div class="modal-body"style="border:0px">
+            <form class="form-horizontal" role="form" id="addForm">
+                <div class="from-group" style="padding-bottom: 50px">
+                    <label class="col-md-4 control-label">图片链接:&nbsp;</label>
+                    <div class="col-md-6">
+                        <input type="text" @change="checkUrl" maxlength="50" v-model="addPicture.link" class="form-control  c-square c-theme"  >
+                        <span style="color: red">{{pictureLink}}</span>
+                    </div>
+                </div>
+                <!-------------------------照片---------------------->
+                <div class="form-group" style="border: 0px">
+                    <label class="col-md-4 control-label">上传图片:</label>
+                    <div class="col-md-7">
+                        <div class="col-md-6">
+                            <input type="file" id="addOnePicture" @change="checkFile" v-on:change = "change()" accept="image/*" />
+                            <span style="color: red">{{adImg}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!--照片预览-->
+                <div class="form-group" id="previewImgContainer" hidden="true" >
+                    <label class="col-md-4 control-label">照片预览:</label>
+                    <div class="col-md-6" style="width: auto">
+                        <div class="img_wrp"  style="width: auto">
+                            <img width="250px" src="" id="viewImg" />
+                            <!--红色×-->
+                            <img class="img_close" src="assets/images/cancel.png" v-on:click="cancelImg()"/>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div  class="modal-footer" style="text-align: center;border: 0px">
+            <!--<div style=" position:relative; float: right; width:200px">-->
+            <button type="button" class="btn btn-primary" v-on:click="sureAddSliderShow()" >保&nbsp;&nbsp;存
+            </button>
+            <button type="button"  class="btn btn-primary" v-on:click="toTable()">关&nbsp;&nbsp;闭
+            </button>
+
+        </div>
+
+    </div>
+<!--添加轮播图 结束-->
+<div id="editSliderShow" hidden="true">
+    <div class="modal-header" style="border: 0px">
+
+        <a href="javascript:;" v-on:click="toTable()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">编辑</div>
+
+        </a>
+
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="editForm">
+            <div class="from-group" style="padding-bottom: 50px">
+                <label class="col-md-4 control-label">图片链接:&nbsp;</label>
+                <div class="col-md-6">
+                    <input type="text" @change="checkLink"  maxlength="50" v-model="editPictue.link" class="form-control  c-square c-theme"  >
+                    <span style="color: red">{{pictureLink}}</span>
+                </div>
+            </div>
+            <!-------------------------照片---------------------->
+            <div class="form-group" style="border: 0px">
+                <label class="col-md-4 control-label">上传图片:</label>
+                <div class="col-md-7">
+                    <div class="col-md-6">
+                        <input type="file" id="editOnePicture"  v-on:change = "change()" accept="image/*" />
+
+                    </div>
+                </div>
+            </div>
+            <!--照片预览-->
+            <div class="form-group" id="previewImg"  >
+                <label class="col-md-4 control-label">照片预览:</label>
+                <div class="col-md-6" style="width: auto">
+                    <div class="img_wrp" style="width: auto" id="waiteUploadImg"  >
+                        <img width="250px" src="" id="view" />
+                        <img class="img_close" src="assets/images/cancel.png" v-on:click="cancelImg()"/>
+                    </div>
+
+                    <br>
+                    <!--预览图片-->
+                    <div class="img_wrp"  style="width: auto" id="editBeforeImg" >
+                        <img width="250px" v-bind:src="'file/'+editPictue.imgUrl" />
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div  class="modal-footer" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click="sureEditPicture()" >保&nbsp;&nbsp;存
+        </button>
+        <button type="button"  class="btn btn-primary" v-on:click="toTable()">关&nbsp;&nbsp;闭
+        </button>
+
+    </div>
+
+</div>
+
+<!--查看图片-->
+<div id="seePicture" hidden="true">
+    <div class="modal-header" style="border: 0px">
+
+        <a href="javascript:;" v-on:click="toTable()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">查看</div>
+
+        </a>
+
+    </div>
+    <div class="modal-body"style="border:0px">
+        <form class="form-horizontal" role="form" id="viewImgForm">
+            <!-------------------------照片---------------------->
+            <!--照片预览-->
+            <div class="form-group" >
+                <label class="col-md-4 control-label">查看照片:</label>
+                <div class="col-md-6" style="width: 500px;height: 500px">
+                    <img  id="" v-bind:src="'file/'+seePicture.imgUrl" style="max-height: 100%;width: 100%" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+
+</div>
+<div id="bar" ></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="assets/heos/default/js/pageBar.js"></script>
+
+    <script>
+        //分页信息
+        var id = 0;
+        var IsEditImg = true;
+        var store = {
+            debug: true,
+            state: {
+                //获取的所有记录
+                listShare: [],
+
+            },
+
+            setMessageAction (newValue) {
+                if (this.debug) console.log('setMessageAction triggered with', newValue)
+                this.state.consultantlistShare = newValue
+            },
+            clearMessageAction () {
+                if (this.debug) console.log('clearMessageAction triggered')
+                this.state.consultantlistShare = ''
+            }
+        }
+        var urls={
+            query:"goodType/query",
+            save:"slideShow/updateSlideShowWithImg",
+            saveWithOutImg:"slideShow/updateSlideShowWithoutImg",
+            getById:"goodType/getById",
+            del:"goodType/delete"
+        };
+        //网站校验
+        function IsURL(urlString)
+        {
+            var regExp = /^((https?|ftp|news):\/\/)?([a-z]([a-z0-9\-]*[\.。])+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel)|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&]*)?)?(#[a-z][a-z0-9_]*)?$/
+
+            if (urlString.match(regExp))
+
+                return true;
+            else
+
+                return false;
+        }
+
+
+        //轮播图
+        var slideShow = new Vue({
+            el : "#table",
+            data:{
+                    pictureList:store.state,
+                    key:0,
+            },
+            created : function(){
+                var data = {};
+                //url查询
+                var url = "slideShow/getAllSlideShow";
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+
+                postPageInfo(data,url);
+                initPageBar();
+
+
+            },
+            computed:{
+
+            },
+            methods : {
+                //轮播图获取
+                getSlideShowPicture: function () {
+                    var url = "slideShow/getAllSlideShow";
+                    var data = {};
+                    //传条件
+                    postPageInfo(data,url);
+                    initPageBar();
+
+                },
+                addThePicture:function () {
+                   $("#table").hide();
+                   $("#addSilderShow").show();
+                   $("#bar").hide()
+                },
+                editThePicture:function(picture){
+                    editSliderShow.editPictue = picture;
+                    $("#table").hide();
+                    $("#editSliderShow").show();
+                    $("#bar").hide();
+                    $("#waiteUploadImg").hide();
+                    $("#editBeforeImg").show()
+
+
+
+
+                },
+                deleteThePicture:function(picture){
+                    if(!confirm("确定删除？")){
+                        return;
+                    }
+                    var data = {};
+                    data.id =  picture.id;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "slideShow/deleteSlideShow",
+                        dataType: "json",
+                        data: data,
+                        success: function (result) {
+                            alert("success");
+                            // 需要重新再次查询数据库
+                            slideShow.getSlideShowPicture();
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                },
+                seeThePicture:function(picture){
+                    $("#table").hide();
+                    $("#seePicture").show();
+                    $("#bar").hide();
+                    seePicture.seePicture = picture
+
+                }
+
+
+
+
+
+
+            }
+        });
+        //添加一个图片
+        var addSilderShow = new Vue({
+            el:"#addSilderShow",
+            data:{
+                addPicture:[],
+                pictureLink:"",
+                adImg:"",
+
+
+            },
+            methods:{
+
+                checkUrl:function(){
+                    if (IsURL(addSilderShow.addPicture.link)==false){
+                        this.pictureLink="请输入正确网址"
+                        return;
+                    }
+                    this.pictureLink = null;
+                },
+                checkFile:function(){
+                    var file = document.getElementById("addOnePicture").files[0];
+                    if (file ==null){
+                        this. adImg="请上传文件"
+                        return null;
+                    }
+                },
+                toSliderShow:function () {
+
+                },
+                sureAddSliderShow:function(){
+
+                    var formData = new FormData();
+                    // var editFrom = document.querySelector('#addVhotel');
+                    var file = document.getElementById("addOnePicture").files[0];
+                    if (file ==null){
+                        this. adImg="请上传文件"
+                        return null;
+                    }
+                    formData.append("file",file);
+                    formData.append("id",id);
+                    formData.append("IsEditImg",true);
+                    formData.append("link",this.addPicture.link);
+                    $.ajax({
+                        url : "slideShow/addOneSlideShow",
+                        type : 'POST',
+                        data : formData,
+                        enctype: 'multipart/form-data',
+                        cache : false,
+                        traditional:true,
+                        contentType : false,
+                        processData : false,
+                        success:function(data){
+                            if(data.status==1)
+                            {
+                                //save success
+                                alert("保存成功");
+                                //矫正数据
+                                slideShow.getSlideShowPicture();
+
+
+                            }else
+                            {
+                                alert("保存失败，请稍后重试");
+                            }
+                        },
+                        error:function()
+                        {
+                            alert("保存失败，请稍后重试");
+                        }
+                    });
+                    $("#table").show('');
+                    $("#addSilderShow").hide('');
+                    $("#bar").show('');
+
+                },
+                change:function() {
+                    var file = document.getElementById("addOnePicture").files[0];
+                    //建一条文件流来读取图片
+                    var reader = new FileReader();
+                    //根据url将文件添加的流中
+                    reader.readAsDataURL(file);
+                    //实现onload接口
+                    reader.onload = function(e) {
+                        //获取文件在流中url
+                        url = reader.result;
+                        // console.log(url)
+                        //将url赋值给img的src属性
+                        $("#viewImg").attr('src',url);
+                        $("#previewImgContainer").show();
+                    }
+                },
+                toTable:function () {
+                    $("#table").show('');
+                    $("#addSilderShow").hide('');
+                    $("#bar").show('');
+
+                },
+                cancelImg:function () {
+                    $("#previewImgContainer").hide('');
+                }
+            }
+        });
+
+        var editSliderShow = new Vue({
+            el:"#editSliderShow",
+            data:{
+                editPictue:[],
+                editList:[],
+                pictureLink:"",
+                adImg:"",
+            },
+            methods: {
+                toTable: function () {
+                    $("#table").show();
+                    $("#bar").show();
+                    $("#editSliderShow").hide();
+                    slideShow.getSlideShowPicture();
+                },
+                checkLink: function () {
+                    if (IsURL(addSilderShow.addPicture.link) == false) {
+                        this.pictureLink = "请输入正确网址"
+                        return;
+                    }
+                    this.pictureLink = null;
+                },
+                change: function () {
+                    var file = document.getElementById("editOnePicture").files[0];
+                    //建一条文件流来读取图片
+                    var reader = new FileReader();
+                    //根据url将文件添加的流中
+                    reader.readAsDataURL(file);
+                    //实现onload接口
+                    reader.onload = function (e) {
+                        //获取文件在流中url
+                        url = reader.result;
+                        // console.log(url)
+                        //将url赋值给img的src属性
+                        $("#waiteUploadImg").show();
+                        $("#view").attr('src', url);
+                        $("#editBeforeImg").hide();
+                    }
+                },
+
+                sureEditPicture: function () {
+                    var file = document.getElementById("editOnePicture").files[0];
+                    if (file !=null){
+                        editSliderShow.eidtPictureWithImg()
+                    } else{
+                        editSliderShow.editPictureWithoutImg();
+                    }
+                    $("#table").show();
+                    $("#editSliderShow").hide();
+                    $("#bar").show();
+                },
+                eidtPictureWithImg: function () {
+                    id = editSliderShow.editPictue.id;
+                    link = editSliderShow.editPictue.link;
+                    var formData = new FormData();
+                    var file = document.getElementById("editOnePicture").files[0];
+                    formData.append("file", file);
+                    formData.append("id", id);
+                    formData.append("IsEditImg", IsEditImg);
+                    formData.append("link", link);
+                    $.ajax({
+                        url: "slideShow/addOneSlideShow",
+                        type: 'POST',
+                        data: formData,
+                        enctype: 'multipart/form-data',
+                        cache: false,
+                        traditional: true,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data.status == 1) {
+                                //save success
+                                alert("保存成功");
+                                //矫正数据
+                                slideShow.getSlideShowPicture();
+
+
+                            } else {
+                                alert("保存失败，请稍后重试");
+                            }
+                        },
+                        error: function () {
+                            alert("保存失败，请稍后重试");
+                        }
+                    });
+
+
+                },
+                editPictureWithoutImg:function () {
+                    id = editSliderShow.editPictue.id;
+                    link = editSliderShow.editPictue.link;
+                    var formData = new FormData();
+                    formData.append("id", id);
+                    formData.append("IsEditImg", IsEditImg);
+                    formData.append("link", link);
+                    $.ajax({
+                        url: "slideShow//addSlideShowWithoutImg",
+                        type: 'POST',
+                        data: formData,
+                        enctype: 'multipart/form-data',
+                        cache: false,
+                        traditional: true,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data.status == 1) {
+                                //save success
+                                alert("保存成功");
+                                //矫正数据
+                                slideShow.getSlideShowPicture();
+
+
+                            } else {
+                                alert("保存失败，请稍后重试");
+                            }
+                        },
+                        error: function () {
+                            alert("保存失败，请稍后重试");
+                        }
+                    });
+
+                }
+            },
+
+        });
+        var seePicture = new Vue({
+            el:"#seePicture",
+            data:{
+                seePicture:[]
+            },
+            methods:{
+              toTable:function () {
+                 $("#table").show();
+                 $("#seePicture").hide();
+                 $("#bar").show();
+              }
+            }
+        });
+
+
+
+
+    </script>
+

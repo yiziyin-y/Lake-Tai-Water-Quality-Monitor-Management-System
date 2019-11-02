@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<!--
+Theme: JANGO - Ultimate Multipurpose HTML Theme Built With Twitter Bootstrap 3.3.7
+Version: 2.0.1
+Author: Themehats
+Site: http://www.themehats.com
+Purchase: http://themeforest.net/item/jango-responsive-multipurpose-html5-template/11987314?ref=themehats
+Contact: support@themehats.com
+Follow: http://www.twitter.com/themehats
+-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:v-bind="http://java.sun.com/jsf/composite" xmlns:v-on="http://java.sun.com/jsf/core">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Consultant</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!--VueSliderStart-->
+    <link  href="assets/Vue/swiper-4.4.1/dist/css/swiper.css" rel="stylesheet" type="text/css">
+    <!--VueSliderEnd-->
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700&amp;subset=all'
+          rel='stylesheet' type='text/css'>
+    <link href="assets/plugins/socicon/socicon.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/bootstrap-social/bootstrap-social.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/animate/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN: BASE PLUGINS  -->
+    <link href="assets/plugins/revo-slider/css/settings.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/revo-slider/css/layers.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/revo-slider/css/navigation.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/owl-carousel/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/slider-for-bootstrap/css/slider.css" rel="stylesheet" type="text/css" />
+    <!-- END: BASE PLUGINS -->
+
+
+    <!-- BEGIN THEME STYLES -->
+    <link href="assets/demos/default/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="assets/demos/default/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="assets/demos/default/css/themes/default.css" rel="stylesheet" id="style_theme" type="text/css" />
+    <link href="assets/demos/default/css/custom.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+
+    <link href="assets/demos/default/css/hotspot.css" rel="stylesheet" type="text/css" />
+
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <style>
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .c-logo:after {
+            width: 0 !important
+        }
+
+        .c-content-title-1>h3 {
+            color: #06b3b9;
+        }
+
+        .c-title>a {
+            color: #06b3b9;
+        }
+        ul li {
+            display: block;
+        }
+
+
+
+    </style>
+
+    <style type="text/css">
+        #container { position:relative;width:1000px;height: 500px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        .BMapLabel{ max-width:none; }
+    </style>
+    <script language="JavaScript" type="text/javascript">
+        function method5(tableid) {
+            tableToExcel(tableid)
+        }
+        function Cleanup() {
+            window.clearInterval(idTmr);
+            CollectGarbage();
+        }
+        var tableToExcel = (function() {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',
+                base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+                format = function(s, c) {
+                    return s.replace(/{(\w+)}/g,
+                        function(m, p) { return c[p]; }) }
+            return function(table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+    </script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=134db1b9cf1f1f2b4427210932b34dcb"></script>
+
+
+</head>
+
+<body class="c-layout-header-fixed c-layout-header-0-topbar">
+
+<!-- BEGIN: LAYOUT/HEADERS/HEADER-2 -->
+<!-- BEGIN: HEADER 2 -->
+<!--<header class="c-layout-header c-layout-header-6" data-minimize-offset="80" include-html="assets/heos/default/fragment/header.html">-->
+<!--</header>-->
+<!-- END: HEADER 2 -->
+<!-- END: LAYOUT/HEADERS/HEADER-2 -->
+
+<!-- BEGIN: CONTENT/USER/FORGET-PASSWORD-FORM -->
+<!--&lt;!&ndash;登录注册弹窗Start&ndash;&gt;-->
+<!--<div id = "form" include-html="assets/heos/default/fragment/form.html"></div>-->
+<!--&lt;!&ndash;登录注册弹窗End&ndash;&gt;-->
+<!-- BEGIN: PAGE CONTAINER -->
+
+<!--BodyStart-->
+
+<div class="c-content-title-1">
+    <h3 style="top:30px ;position: relative"  class="c-font-34 c-font-center c-font-bold c-font-uppercase c-margin-b-30">
+        太湖胥口湾环境水体监测信息系统
+    </h3>
+    <div class=" c-theme-bg"></div>
+    <br/><br/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a id="syid" href="consultant.html">首页 </a></li>
+                    <li class="dropdown">
+                        <a data-toggle="collapse" data-target="#demo2"class="collapsed" aria-expanded="false">统计汇总<b class="caret"></b></a>
+                        <ul id="demo2" class="menu collapse" aria-expanded="false">
+                            <li><a href="statistic1.html">指标</a></li>
+                            <li><a href="statistic2.html">采样点</a></li>
+                        </ul>
+                    </li>
+                    <li><a id="bbid" href="monthReport.html">月度报表</a></li>
+                    <li><a id="fbid" href="map.html">采样地区分布图</a></li>
+                </ul>
+            </div>
+            <!--左边菜单栏-->
+
+
+            <div id="container"></div>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+<!-- BEGIN: LAYOUT/BASE/BOTTOM -->
+<!-- BEGIN: CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="assets/global/plugins/excanvas.min.js"></script>
+<![endif]-->
+<script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
+<script src="assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
+<script src="assets/heos/default/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
+
+<!-- END: CORE PLUGINS -->
+
+<!-- BEGIN: LAYOUT PLUGINS -->
+<script src="assets/plugins/revo-slider/js/jquery.themepunch.tools.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/jquery.themepunch.revolution.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.slideanims.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.layeranimation.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.navigation.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.video.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.parallax.min.js" type="text/javascript"></script>
+<script src="assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+<script src="assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+<script src="assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="assets/plugins/smooth-scroll/jquery.smooth-scroll.js" type="text/javascript"></script>
+<script src="assets/plugins/typed/typed.min.js" type="text/javascript"></script>
+<script src="assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+<script src="assets/plugins/js-cookie/js.cookie.js" type="text/javascript"></script>
+<!-- END: LAYOUT PLUGINS -->
+
+<!-- BEGIN: THEME SCRIPTS -->
+<script src="assets/base/js/components.js" type="text/javascript"></script>
+<script src="assets/base/js/components-shop.js" type="text/javascript"></script>
+<script src="assets/base/js/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        App.init(); // init core
+    });
+</script>
+
+
+<script type="text/javascript">
+    var map = new BMap.Map("container");
+    var point = new BMap.Point(120.260493,31.128324);
+    map.centerAndZoom(point,13.3);
+
+    var mapPoints = [
+        {x:31.128324,y:120.260493,title:"",con:"取样点1",branch:"1#"},
+        {x:31.121533,y:120.221033,title:"",con:"取样点2",branch:"2#"},
+        {x:31.113452,y:120.276061,title:"",con:"取样点3",branch:"3#"},
+        {x:31.134563,y:120.282506,title:"",con:"取样点4",branch:"4#"},
+        {x:31.102895,y:120.201979,title:"",con:"取样点5",branch:"5#"},
+
+        {x:31.091235,y:120.1827,title:"",con:"取样点6",branch:"6#"},
+        {x:31.076817,y:120.213018,title:"",con:"取样点7",branch:"7#"},
+        {x:31.069629,y:120.214393,title:"",con:"取样点8",branch:"8#"},
+        {x:31.070312,y:120.246775,title:"",con:"取样点9",branch:"9#"},
+        {x:31.0472,y:120.173331,title:"",con:"取样点10",branch:"10#"},
+
+        {x:31.073149,y:120.185930,title:"",con:"田岸闸",branch:"田岸闸"},
+        {x:31.074377,y:120.191118,title:"",con:"污水厂排水口",branch:"污水厂排水口"},
+        {x:31.073503,y:120.202909,title:"",con:"元山闸外侧",branch:"元山闸外侧"},
+        {x:31.07355,y:120.202843,title:"",con:"元山闸内侧",branch:"元山闸内侧"},
+        {x:31.113527,y:120.283998,title:"",con:"寺前村",branch:"寺前村"},
+        {x:31.131721,y:120.274238,title:"",con:"航管站",branch:"航管站"},
+        {x:31.13137,y:120.213041,title:"",con:"渔洋山",branch:"渔洋山"},
+        {x:31.101887,y:120.239576,title:"",con:"胥湖心",branch:"胥湖心"},
+    ];
+
+    map.enableScrollWheelZoom(true);
+    // 函数 创建多个标注
+    function markerFun (points,label,infoWindows) {
+        var markers = new BMap.Marker(points);
+        map.addOverlay(markers);
+        markers.setLabel(label);
+        markers.addEventListener("click",function (event) {
+            console.log("0001");
+            map.openInfoWindow(infoWindows,points);//参数：窗口、点  根据点击的点出现对应的窗口
+        });
+    }
+    for (var i = 0;i<mapPoints.length;i++) {
+        var points = new BMap.Point(mapPoints[i].y,mapPoints[i].x);//创建坐标点
+        var opts = {
+            width:200,
+            height: 100,
+            title:mapPoints[i].title
+        };
+        var label = new BMap.Label(mapPoints[i].branch,{
+            offset:new BMap.Size(25,5)
+        });
+
+        label.setStyle({
+            color: "red",
+            backgroundColor: 'transparent',//框框背景色
+
+
+            fontSize: "12px",
+            height: "20px",
+            lineHeight: "20px",
+            fontFamily: "微软雅黑"
+        });
+
+        var infoWindows = new BMap.InfoWindow(mapPoints[i].con,opts);
+        markerFun(points,label,infoWindows);
+    }
+</script>
+
+
+
+<script>
+    var index1=location.search.indexOf("?");
+    var rolenum=parseInt(location.search.substring(index1+1));
+    var rol1=Math.floor(rolenum/10);
+    var rol2=rolenum%10;
+    if (rol1==1)
+    {
+        $("#addbtn").removeAttr("disabled");
+    }
+    else if (rol1==2)
+    {
+        $("#addbtn").removeAttr("disabled");
+        $("#BM123").hide();
+        var str="#BM";
+        str=str+rol2;
+        $(str).show();
+    }
+    else {
+        $("#BM123").hide();
+        var str="#BM";
+        str=str+rol2;
+        $(str).show();
+        $("#addbtn").attr({"disabled":"disabled"});
+        $("#showTable").show();
+        $("#tableExcel2").hide();
+    }
+    $("ul li ul li a").each(function(){
+        var link = $(this).attr("href");
+        var new_link = link+"?"+rolenum;
+        $(this).attr("href",new_link);
+    });
+    var link = $("#syid").attr("href");
+    var new_link = link+"?"+rolenum;
+    $("#syid").attr("href",new_link);
+    var link = $("#bbid").attr("href");
+    var new_link = link+"?"+rolenum;
+    $("#bbid").attr("href",new_link);
+    var link = $("#fbid").attr("href");
+    var new_link = link+"?"+rolenum;
+    $("#fbid").attr("href",new_link);
+</script>
+<!-- END: THEME SCRIPTS -->
+
+<!-- BEGIN: PAGE SCRIPTS -->
+<script src="assets/heos/default/js/scripts/revo-slider/slider-4.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.parallax.min.js" type="text/javascript"></script>
+<script src="assets/heos/default/js/scripts/common/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        App.init(); // init core
+    });
+</script>
+<!-- END: THEME SCRIPTS -->
+
+<!-- BEGIN: PAGE SCRIPTS -->
+<script src="assets/demos/default/js/scripts/revo-slider/slider-4.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.parallax.min.js" type="text/javascript"></script>
+<script src='assets/plugins/flickity.pkgd.min.js'></script>
+<script src='assets/plugins/vue.js'></script>
+<script src="assets/demos/default/js/hotspot.js"></script>
+<script src="assets/heos/default/js/pageBar.js"></script>
+<script>
+
+
+
+</script>
+<script src="assets/heos/default/js/scripts/common/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+
+        initNavigation(""); // init core
+    });
+</script>
+<!-- END: PAGE SCRIPTS -->
+<!-- END: LAYOUT/BASE/BOTTOM -->
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+</body>
+
+</html>

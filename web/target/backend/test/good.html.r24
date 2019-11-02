@@ -1,0 +1,1044 @@
+<div id="goodShow" style="width: inherit" xmlns:v-on="http://java.sun.com/jsf/composite"
+     xmlns:v-bind="http://java.sun.com/jsf/core" xmlns:v-on="http://java.sun.com/jsf/facelets"
+     xmlns:v-on="http://java.sun.com/jsf/html" xmlns:v-on="http://xmlns.jcp.org/jsf/core"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/composite" xmlns:v-bind="http://xmlns.jcp.org/jsf/html"
+     xmlns:v-on="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+    <div id = "searchGroups" class="c-body">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索条件</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="searchGroupsName" class="col-md-4 control-label">商品名称</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control  c-square c-theme" id="searchGroupsName"  v-model="searchByName">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12" style="text-align: right; width: 70%">
+                <h6>&nbsp;</h6>
+                <button type="button"  class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="getAllGoods()"><i class="fa fa-search"></i> 搜索</button>
+
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="c-content-title-3 c-theme-border">
+                    <h4 style="font-size:20px">搜索结果</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="c-body">
+        <ul>
+            <div  class="c-content">
+                <div class="c-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover">
+                                <thead>
+                                <td  style="text-align: left">商品名称</td>
+                                <td  style="text-align: left">商品品牌</td>
+                                <td  style="text-align: left">库存数量</td>
+                                <td  style="text-align: left">是否已审核</td>
+                                <td  style='text-align: left;' colspan="2">操作</td>
+                                </thead>
+                                <tbody >
+                                <tr v-for="(good,index) in goods.listShare"  v-bind:id='goods.listShare.id'>
+                                    <td>{{good.goodName}}</td>
+                                    <td>{{good.brandName}}</td>
+                                    <td>{{good.quantity}}</td>
+                                    <td v-if="good.auditStatus ==1">未审核</td>
+                                    <td v-if="good.auditStatus == 2">审核成功</td>
+                                    <td v-if="good.auditStatus == 3">审核失败</td>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-info c-btn-square c-btn-uppercase" v-on:click="toReviewGoodPage(good)" ><i class="fa fa-pencil"></i>审核</button>
+                                        &nbsp;
+                                        <button type="button"  class="btn btn-danger c-btn-square" v-on:click="delectGood(good)" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+
+</div>
+
+
+
+
+<!--审核一个供应商类别  开始-->
+<div id="reviewGood" hidden="true">
+
+    <!--返回-->
+    <div class="modal-header" style="border: 0px">
+
+        <a href="javascript:;" v-on:click="toGoodPage()" style="text-align: center">
+            <div class="c-content-line-icon c-icon-5" style="height: 30px;width: 30px;float: left" ></div>
+            <div style="text-align: left;height: 30px;line-height: 30px;padding-left:40px;">审核</div>
+
+        </a>
+
+    </div>
+
+    <!--审核界面  展示商品的所有数据-->
+    <div class="modal-body" style="border-bottom: 0px">
+        <form class="form-horizontal" role="form" >
+            <!--产品名称-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">产品名称:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.goodName}}</span>
+                </div>
+            </div>
+            <!--英文名称-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">英文名称:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.englishName}}</span>
+                </div>
+            </div>
+
+
+            <!--是否为食品-->
+            <div class="form-group"  >
+                <label class="col-md-4  control-label">食品:</label>
+                <div class="col-md-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="food" value="1" v-model="reviewList.foodFlag" v-on:click = "cheackIsFood()" > 食品
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="food"  value="0" v-model="reviewList.foodFlag" v-on:click = "cheackIsFood()"> 非食品
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!--商品描述-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">商品描述:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.description}}</span>
+                </div>
+            </div>
+
+            <!--销售价-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">销售价:</label>
+                <div class="col-md-4 control-label">
+
+                    <span>{{reviewList.salePrice}}</span>
+                </div>
+            </div>
+            <!--面价-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">面价:</label>
+                <div class="col-md-4 control-label ">
+
+                    <span>{{reviewList.price}}</span>
+                </div>
+            </div>
+            <!--优惠价-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">优惠价:</label>
+                <div class="col-md-4 control-label">
+
+                    <span>{{reviewList.discountPrice}}</span>
+                </div>
+            </div>
+            <!--项目价-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">项目价:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.prjPrice}}</span>
+                </div>
+            </div>
+            <!--白金会员价-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">白金会员价:</label>
+                <div class="col-md-4 control-label">
+
+                    <span>{{reviewList.pMemPrice}}</span>
+                </div>
+            </div>
+            <!--钻石会员价-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">钻石会员价:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.dMemPrice}}</span>
+
+                </div>
+            </div>
+
+            <!--货号-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">货号:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.prodNo}}</span>
+
+                </div>
+            </div>
+            <!--制造商名称-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">制造商名称:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.producer}}</span>
+
+                </div>
+            </div>
+            <!--品牌-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">品牌名称:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.brandName}}</span>
+
+                </div>
+            </div>
+            <!--<div class="form-group "  >-->
+            <!--<label class="col-md-6  control-label">品牌:</label>-->
+
+            <!--<div class="col-md-6">-->
+            <!--&lt;!&ndash;<select v-model = "good.brandId" &ndash;&gt;-->
+            <!--<select  id = "brand" class="form-control input-lg c-square" name="state" v-model="brandIndex" >-->
+            <!--<option  value="-1" selected = "selected">&#45;&#45;选择品牌&#45;&#45;</option>-->
+            <!--<option v-for="(oneBrand,index) in brands" v-bind:value="index" v-text="oneBrand.brandName" ></option>-->
+
+            <!--</select>-->
+            <!--</select>-->
+            <!--</div>-->
+            <!--<label class="col-md-1  control-label">-->
+            <!--<span>bandId:{{good.brandId}}</span>-->
+            <!--</label>-->
+
+
+            <!--</div>-->
+            <!--系列-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">系列:</label>
+                <div class="col-md-4">
+                    <span>{{reviewList.series}}</span>
+
+                </div>
+            </div>
+            <!--型号-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">型号:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.type}}</span>
+
+                </div>
+            </div>
+            <!--产地-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">产地:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.location}}</span>
+
+                </div>
+            </div>
+            <!--最低起订量-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">最低起订量:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.minOrderCnt}}</span>
+
+                </div>
+            </div>
+            <!--到货期-->
+            <div class="form-group">
+
+                <label class="col-md-4 control-label">到货期:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.recDays}}</span>
+
+                </div>
+                <!--<span>dada{{reviewList.recDays}}</span>-->
+            </div>
+            <!--最小单位-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">最小单位:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.minUnit}}</span>
+
+                </div>
+            </div>
+            <!--销售包装单位-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">销售包装单位:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.salePkgUnit}}</span>
+
+                </div>
+            </div>
+            <!--两种单位间的换算率-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">两种单位间的换算率:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.unitConvRate}}</span>
+
+                </div>
+            </div>
+            <!--产品尺寸-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">产品尺寸:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.size}}</span>
+
+                </div>
+            </div>
+            <!--包装尺寸-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">包装尺寸:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.pkgSize}}</span>
+
+                </div>
+            </div>
+            <!--主要成分/材质-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">主要成分/材质:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.material}}</span>
+
+                </div>
+            </div>
+            <!--净重-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">净重:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.netWeight}}</span>
+
+                </div>
+            </div>
+            <!--毛重-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">毛重:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.grossWeight}}</span>
+
+                </div>
+            </div>
+            <!--容量-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">容量:</label>
+                <div class="col-md-4 control-label">
+                    <span>{{reviewList.vol}}</span>
+
+                </div>
+            </div>
+
+            <!--食品属性Start-->
+            <div id = "isFood" hidden = "true">
+                <!--保质期-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">保质期:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.shelfLife}}</span>
+
+                    </div>
+                </div>
+
+                <!--进口类型-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">进口类型:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{}}</span>
+
+                    </div>
+                </div>
+                <!--食品添加剂-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">食品添加剂:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.foodAdd}}</span>
+
+                    </div>
+                </div>
+                <!--酒精度-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">酒精度:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.alcohol}}</span>
+
+                    </div>
+                </div>
+                <!--葡萄酒种类-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">葡萄酒种类:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.winType}}</span>
+
+                    </div>
+                </div>
+                <!--葡萄酒等级-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">葡萄酒等级:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.winLevel}}</span>
+
+                    </div>
+                </div>
+                <!--法国产区-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">法国产区:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.franceLocation}}</span>
+
+                    </div>
+                </div>
+                <!--葡萄品种-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">葡萄品种:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.grapeType}}</span>
+
+                    </div>
+                </div>
+                <!--糖分-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">糖分:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.sugar}}</span>
+
+                    </div>
+                </div>
+                <!--分级-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">分级:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.level}}</span>
+
+                    </div>
+                </div>
+                <!--醒酒时间-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">醒酒时间:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.soberTime}}</span>
+
+                    </div>
+                </div>
+                <!--采摘年份-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">采摘年份:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.pickYear}}</span>
+
+                    </div>
+                </div>
+                <!--香味-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">香味:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.scent}}</span>
+
+                    </div>
+                </div>
+            </div >
+            <!--食品属性End-->
+
+            <!--非食品属性Start-->
+            <div id = "isNoFood" hidden="true" >
+                <!--保质/保修期-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">保质/保修期</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.shelfLife}}</span>
+
+                    </div>
+                </div>
+                <!--颜色-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">颜色:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.color}}</span>
+
+                    </div>
+                </div>
+                <!--工艺-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">工艺:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.tech}}</span>
+
+                    </div>
+                </div>
+                <!--风格-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">风格:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.style}}</span>
+
+                    </div>
+                </div>
+                <!--面料-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">面料:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.fabric}}</span>
+
+                    </div>
+                </div>
+                <!--填充物-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">填充物:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.filler}}</span>
+
+                    </div>
+                </div>
+                <!--纱支-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">纱支:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.yarnCount}}</span>
+
+                    </div>
+                </div>
+                <!--密度-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">密度:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.density}}</span>
+
+                    </div>
+                </div>
+                <!--图案-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">图案:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.pic}}</span>
+
+                    </div>
+                </div>
+                <!--电压-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">电压:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.voltage}}</span>
+
+                    </div>
+                </div>
+                <!--功率-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">功率:</label>
+                    <div class="col-md-6  control-label">
+                        <span>{{reviewList.power}}</span>
+
+                    </div>
+                </div>
+                <!--安装方法-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">安装方法:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.installMethod}}</span>
+
+                    </div>
+                </div>
+
+                <!--售后服务-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">售后服务:</label>
+                    <div class="col-md-4 control-label">
+                        <span>{{reviewList.afterService}}</span>
+
+                    </div>
+                </div>
+            </div >
+            <!--非食品属性End-->
+            <!--其他规格-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">其他规格:</label>
+                <div class="col-md-4 control-label">
+                    <span></span>
+
+                </div>
+            </div>
+
+            <!--产品系统编号-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">产品系统编号</label>
+                <div class="col-md-4 control-label">
+                    <span style="text-align: left">{{reviewList.id}}</span>
+                </div>
+            </div>
+<!--审核意见-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">审核意见:</label>
+                <div class="col-md-4">
+                    <input type="text"  maxlength="50" v-model="reviewList.auditComment" class="form-control  c-square c-theme"  >
+
+                </div>
+            </div>
+            <!--PAR数:-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">PAR数:</label>
+                <div class="col-md-4">
+                    <input type="text"  maxlength="50" v-model="reviewList.par" class="form-control  c-square c-theme"  >
+
+                </div>
+            </div>
+
+            <!--备用数-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">备用数:</label>
+                <div class="col-md-4">
+                    <input type="text"  maxlength="50" v-model="reviewList.reserveCnt" class="form-control  c-square c-theme"  >
+
+                </div>
+            </div>
+            <!--大类编号 -->
+            <!--分类编号 -->
+            <!--类型编号 -->
+
+            <!--备用数-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">预算项：</label>
+                <div class="col-md-4">
+                    <input type="text"  maxlength="50" v-model="reviewList.reserveCnt" class="form-control  c-square c-theme"  >
+
+                </div>
+            </div>
+
+            <!--适用酒店类型-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">适用酒店类型</label>
+                <div class="col-md-4 " id="editBigTypeShow" style="height: inherit;width: 140px" >
+
+                    <!--<select id = "chooseHoteltype"  name="states[]" class="singleSelect" >-->
+                        <!--<option selected = "selected">&#45;&#45;选择适用酒店类型&#45;&#45;</option>-->
+                        <!--<option >精华酒店</option>-->
+                        <!--<option >五星级</option>-->
+                        <!--<option >四星级</option>-->
+                        <!--<option >三星级</option>-->
+                        <!--<option >民宿</option>-->
+                    <!--</select>-->
+
+                    <label><input name="Fruit" type="checkbox" value="" />精华酒店 </label>
+                    <label><input name="Fruit" type="checkbox" value="" />五星级 </label>
+                    <label><input name="Fruit" type="checkbox" value="" />四星级 </label>
+                    <label><input name="Fruit" type="checkbox" value="" />三星级 </label>
+                    <label><input name="Fruit" type="checkbox" value="" />精品酒店 </label>
+                    <label><input name="Fruit" type="checkbox" value="" />度假 </label>
+
+                </div>
+            </div>
+
+
+            <!--修改适用类型-->
+            <!--大类-->
+            <div class="col-md-12 "  >
+                <label class="col-md-3  control-label">修改商品类型:</label>
+                <div class="col-md-2" >
+                    <select id = "bigType" class="form-control input-lg c-square " name="state"  style="height: inherit">
+                        <option value="-1" selected = "selected">--选择大类--</option>
+                        <option v-for="(type,index) in bigType" v-bind:value="index" v-text="type.name" ></option>
+
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select  id = "midType" class="form-control input-lg c-square" name="state" v-model="midTypeIndex" v-on:click="selectMidType(midTypeIndex)">
+                        <option  value="-1" selected = "selected">--选择类型--</option>
+                        <option v-for="(type,index) in midType" v-bind:value="index" v-text="type.name" ></option>
+
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select id = "minType" v-model = "minTypeIndex" class="form-control input-lg c-square" v-on:click="selectMinType(minTypeIndex)">
+                        <option value="-1" selected = "selected">--选择分类--</option>
+                        <option v-for="(type,index) in minType" v-bind:value="index" v-text="type.name" ></option>
+
+
+                    </select>
+                </div>
+
+
+
+
+
+                <label class="col-md-3  control-label" >编号:<span>{{goodCode}}</span></label>
+
+            </div>
+            <!--预算项-->
+            <!--证书的展示列-->
+            <div  id = "upfile" class="form-group">
+                <label class="col-md-4 control-label">证书的展示列</label>
+                <div class="col-md-6" style="width: auto">
+                    <div v-for="image in reviewList.certFilesUrlList" class="img_wrp">
+                        <img width="150px"  v-bind:src="'file/'+image.url">
+                    </div>
+                </div>
+            </div>
+
+            <!--封面图-->
+            <div class="form-group" >
+                <label class="col-md-4 control-label">封面图:</label>
+                <div class="col-md-6" style="width: auto">
+                    <div  class="img_wrp" >
+                        <img width="150px"  v-bind:src="'file/'+reviewList.url">
+                    </div>
+                </div>
+            </div>
+            <!--展示图的展示列-->
+            <div id = "showImage" class="form-group" >
+                <label class="col-md-4 control-label">展示图的展示列</label>
+                <div class="col-md-6" style="width: auto">
+                    <div v-for="image in reviewList.showImgsUrlList" class="img_wrp">
+                        <img width="150px"  v-bind:src="'file/'+image.url">
+                    </div>
+                </div>
+            </div>
+
+            <!--详情图的展示列-->
+            <div id = "detailImage" class="form-group">
+                <label class="col-md-4 control-label">详情图的展示列</label>
+                <div class="col-md-6" style="width: auto">
+                    <div v-for="image in reviewList.detailImgsUrlList" class="img_wrp">
+                        <img width="150px"   v-bind:src="'file/'+image.url">
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </form>
+
+    </div>
+
+    <div  class="modal-footer col-md-12" style="text-align: center;border: 0px">
+        <!--<div style=" position:relative; float: right; width:200px">-->
+        <button type="button" class="btn btn-primary" v-on:click="sureReviewGood()" >通&nbsp;&nbsp;过
+        </button>
+        <button type="button" class="btn btn-primary" v-on:click="NosureReviewGood()" >不&nbsp;&nbsp;通&nbsp;&nbsp;过
+        </button>
+        <button type="button"  class="btn btn-primary" v-on:click="toGoodPage()">取&nbsp;&nbsp;消
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<div id="bar" ></div>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="assets/heos/default/js/pageBar.js"></script>
+
+<script>
+    //分页信息
+    var id = 0;
+    var IsEditImg = true;
+    var store = {
+        debug: true,
+        state: {
+            //获取的所有记录
+            listShare: [],
+
+        },
+
+        setMessageAction (newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue)
+            this.state.consultantlistShare = newValue
+        },
+        clearMessageAction () {
+            if (this.debug) console.log('clearMessageAction triggered')
+            this.state.consultantlistShare = ''
+        }
+    }
+
+    //网站校验
+    function IsURL(urlString)
+    {
+        var regExp = /^((https?|ftp|news):\/\/)?([a-z]([a-z0-9\-]*[\.。])+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel)|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&]*)?)?(#[a-z][a-z0-9_]*)?$/
+
+        if (urlString.match(regExp))
+
+            return true;
+        else
+
+            return false;
+    }
+    //供应商类别
+    var goodShow = new Vue({
+        el:"#goodShow",
+        data:{
+            goods:store.state,
+            goodList:"",
+            searchByName:""
+
+        },
+        created : function(){
+            var data = {};
+
+            //url查询
+            var url = "good/getAllGoods";
+            //查询条件
+            //派出pageIndex oageSize
+            //传条件
+            postPageInfo(data,url);
+            initPageBar();
+
+        },
+        methods:{
+            getAllGoods:function () {
+                var data = {};
+                data.goodName =goodShow.searchByName;
+                //url查询
+                var url = "good/getAllGoods";
+                //查询条件
+                //派出pageIndex oageSize
+                //传条件
+                postPageInfo(data,url);
+                initPageBar();
+
+            },
+            delectGood:function(good){
+                if(!confirm("确定删除？")){
+                    return;
+                }
+                var data = {};
+                data.id =  good.id;
+
+                $.ajax({
+                    type: "POST",
+                    url: "good/delectGood",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        alert("success");
+                        // 需要重新再次查询数据库
+                        goodShow.getAllGoods();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            },
+            toReviewGoodPage:function (good) {
+                reviewGood.reviewList = good;
+                $("#goodShow").hide();
+                $("#reviewGood").show();
+                $("#bar").hide();
+
+            }
+
+
+
+
+        }
+    });
+
+    //审核 商品
+    var reviewGood = new Vue({
+        el:"#reviewGood ",
+        data:{
+            reviewGoods:[],
+            reviewList:[],
+            reviewGoodByName:"",
+            bigTypeIndex: -1,
+            midTypeIndex: -1,
+            minTypeIndex: -1,
+            bigType: [],
+            midType: [],
+            minType: [],
+
+        },
+        created:function(){
+            this.getAllBigType();
+        },
+        computed: {
+            goodCode: function () {
+                var goodCode = "0000";
+                //   if(this.bigType.length <= 0 ){
+                //       return 0;
+                //   }
+                //   if(this.midType.length <= 0 && this.bigTypeIndex >= 0){
+                //       return this.bigType[this.bigTypeIndex].code+" ";
+                //   }
+                if(this.minType.length > 0 && this.minTypeIndex >= 0){
+                    goodCode = this.bigType[this.bigTypeIndex].code+""+this.midType[this.midTypeIndex].code+""+this.minType[this.minTypeIndex].code;
+                }
+
+                return goodCode;
+            },
+        },
+        methods: {
+            cheackIsFood: function(){
+                $("#isFood").toggle();
+                $("#isNoFood").toggle();
+            },
+            toGoodPage: function () {
+                $("#goodShow").show();
+                $("#bar").show();
+                $("#reviewGood").hide();
+                // goodShow.getAllGoodTypes();
+
+            },
+            sureReviewGood:function (){
+                var data = {};
+                data.par = reviewGood.reviewList.par;
+                data.reserveCnt=reviewGood.reviewList.reserveCnt;
+                data.id = reviewGood.reviewList.id;
+                data.auditStatus =2;
+                data.reserveCnt = reviewGood.reviewList.reserveCnt
+                data.goodTypeId= reviewGood.reviewList.goodTypeId;
+                data.auditComment=reviewGood.reviewList.auditComment;
+                $.ajax({
+                    type: "POST",
+                    url: "good/reviewGood",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        // 需要重新再次查询数据库
+                        goodShow.getAllGoods();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#goodShow").show();
+                $("#bar").show();
+                $("#reviewGood").hide();
+
+            },
+            NosureReviewGood:function(){
+             //  reviewGood.reviewList.par=0;
+               //reviewGood.reviewList.reserveCnt=null;
+
+                // reviewGood.reviewList.goodTypeId=null;
+                var data = {};
+               // data.par = reviewGood.reviewList.par;
+               // data.reserveCnt=reviewGood.reviewList.reserveCnt;
+                data.id = reviewGood.reviewList.id;
+                data.auditStatus =3;
+                data.auditComment=reviewGood.reviewList.auditComment;
+               // data.goodTypeId= reviewGood.reviewList.goodTypeId;
+                $.ajax({
+                    type: "POST",
+                    url: "good/reviewGood",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        alert("审核通过");
+                        // 需要重新再次查询数据库
+                        goodShow.getAllGoods();
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $("#goodShow").show();
+                $("#bar").show();
+                $("#reviewGood").hide();
+
+            },
+            getAllBigType: function () {
+                var data = {};
+                //  data.name ="";
+                //  data.parentId = 0;
+                data.type =1;
+                _this = this;
+                $.ajax({
+                    type:"POST",
+                    url:"goodType/getAllBigTypes",
+                    dataType:"json",
+                    data:data,
+                    success:function(result){
+                        _this.bigType = result.data.rows;
+                        _this.$nextTick(function () {
+                            $('#bigType').select2();
+                            $('#midType').select2();
+                            $('#minType').select2();
+                            $('#chooseHoteltype').select2;
+                        })
+                    },
+                    error:function () {
+
+                    }
+                });
+            },
+
+
+
+        },
+
+    });
+
+
+    $('#bigType').change(function(){
+        var bigIndex = $(this).children('option:selected').val();
+        reviewGood.bigTypeIndex = bigIndex;
+
+        reviewGood.minType = [];
+        reviewGood.midType = [];
+
+        reviewGood.midTypeIndex = -1;
+        reviewGood.minTypeIndex = -1;
+
+
+        var data = {};
+        data.parentId =reviewGood.bigType[bigIndex].id;
+        data.type = 2;
+        $.ajax({
+            type:"POST",
+            url:"goodType/getAllMidTypes",
+            dataType:"json",
+            data:data,
+            success:function(result){
+                reviewGood.midType = result.data.rows;
+                $('#midType').select2();
+            },
+            error:function () {
+
+            }
+        });
+
+    });
+    $('#midType').change(function(){
+        var midIndex = $(this).children('option:selected').val();
+        reviewGood.midTypeIndex = midIndex;
+        reviewGood.minType = [];
+        reviewGood.minTypeIndex = -1;
+        var data = {};
+        data.parentId = reviewGood.midType[midIndex].id;
+        data.type = 3;
+        $.ajax({
+            type:"POST",
+            url:"goodType/getAllMinTypes",
+            dataType:"json",
+            data:data,
+            success:function(result){
+                reviewGood.minType = result.data.rows;
+                $('#minType').select2();
+            },
+            error:function () {
+
+            }
+        });
+
+    });
+    $('#minType').change(function(){
+        var minIndex = $(this).children('option:selected').val();
+        reviewGood.minTypeIndex = minIndex;
+        reviewGood.reviewList.goodTypeId = reviewGood.minType[minIndex].id;
+
+
+    });
+
+</script>
+

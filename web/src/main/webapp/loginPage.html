@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!--
+Theme: JANGO - Ultimate Multipurpose HTML Theme Built With Twitter Bootstrap 3.3.7
+Version: 2.0.1
+Author: Themehats
+Site: http://www.themehats.com
+Purchase: http://themeforest.net/item/jango-responsive-multipurpose-html5-template/11987314?ref=themehats
+Contact: support@themehats.com
+Follow: http://www.twitter.com/themehats
+-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:v-bind="http://java.sun.com/jsf/composite" xmlns:v-on="http://java.sun.com/jsf/core">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Consultant</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!--VueSliderStart-->
+    <link  href="assets/Vue/swiper-4.4.1/dist/css/swiper.css" rel="stylesheet" type="text/css">
+    <!--VueSliderEnd-->
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700&amp;subset=all'
+          rel='stylesheet' type='text/css'>
+    <link href="assets/plugins/socicon/socicon.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/bootstrap-social/bootstrap-social.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/animate/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN: BASE PLUGINS  -->
+    <link href="assets/plugins/revo-slider/css/settings.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/revo-slider/css/layers.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/revo-slider/css/navigation.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/owl-carousel/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/slider-for-bootstrap/css/slider.css" rel="stylesheet" type="text/css" />
+    <!-- END: BASE PLUGINS -->
+
+
+    <!-- BEGIN THEME STYLES -->
+    <link href="assets/demos/default/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="assets/demos/default/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="assets/demos/default/css/themes/default.css" rel="stylesheet" id="style_theme" type="text/css" />
+    <link href="assets/demos/default/css/custom.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+
+    <link href="assets/demos/default/css/hotspot.css" rel="stylesheet" type="text/css" />
+
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <style>
+
+        #from
+        {
+            background-color: #FFFFFF;
+        }
+        .mycenter
+        {
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            width: 500px;
+            padding: 5%;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+        .mycenter mysign
+        {
+            width: 440px;
+        }
+        .mycenter input, checkbox, button
+        {
+            margin-top: 2%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        .mycheckbox
+        {
+            margin-top: 10px;
+            margin-left: 40px;
+            margin-bottom: 10px;
+            height: 10px;
+        }
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .c-logo:after {
+            width: 0 !important
+        }
+
+        .c-content-title-1>h3 {
+            color: #06b3b9;
+        }
+
+        .c-title>a {
+            color: #06b3b9;
+        }
+        ul li {
+            display: block;
+        }
+
+    </style>
+    <script language="JavaScript" type="text/javascript">
+        function method5(tableid) {
+            tableToExcel(tableid)
+        }
+        function Cleanup() {
+            window.clearInterval(idTmr);
+            CollectGarbage();
+        }
+        var tableToExcel = (function() {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',
+                base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+                format = function(s, c) {
+                    return s.replace(/{(\w+)}/g,
+                        function(m, p) { return c[p]; }) }
+            return function(table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+    </script>
+
+
+
+</head>
+
+<body class="c-layout-header-fixed c-layout-header-0-topbar">
+
+<!-- BEGIN: LAYOUT/HEADERS/HEADER-2 -->
+<!-- BEGIN: HEADER 2 -->
+<!--<header class="c-layout-header c-layout-header-6" data-minimize-offset="80" include-html="assets/heos/default/fragment/header.html">-->
+<!--</header>-->
+<!-- END: HEADER 2 -->
+<!-- END: LAYOUT/HEADERS/HEADER-2 -->
+
+<!-- BEGIN: CONTENT/USER/FORGET-PASSWORD-FORM -->
+<!--&lt;!&ndash;登录注册弹窗Start&ndash;&gt;-->
+<!--<div id = "form" include-html="assets/heos/default/fragment/form.html"></div>-->
+<!--&lt;!&ndash;登录注册弹窗End&ndash;&gt;-->
+<!-- BEGIN: PAGE CONTAINER -->
+
+<!--BodyStart-->
+<form id="from">
+    <div class="mycenter">
+        <div class="mysign">
+            <div class="col-lg-11 text-center text-info">
+                <h2>
+                    请登录</h2>
+            </div>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" name="username" v-model="name" placeholder="请输入账户名" required
+                       autofocus />
+            </div>
+            <div class="col-lg-10">
+            </div>
+            <div class="col-lg-10">
+                <input type="password" class="form-control" name="password" v-model="pwd" placeholder="请输入密码" required
+                       autofocus />
+            </div>
+            <div class="col-lg-10">
+            </div>
+            <div class="col-lg-10 mycheckbox checkbox">
+                <input type="checkbox" class="col-lg-1">记住密码</input>
+            </div>
+            <div class="col-lg-10">
+            </div>
+            <div class="col-lg-10">
+                <button type="button" id="btn" class="btn btn-success col-lg-12" v-on:click="dealLogin()">
+                    登录</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- BEGIN: LAYOUT/BASE/BOTTOM -->
+<!-- BEGIN: CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="assets/global/plugins/excanvas.min.js"></script>
+<![endif]-->
+<script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
+<script src="assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
+<script src="assets/heos/default/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
+
+<!-- END: CORE PLUGINS -->
+
+<!-- BEGIN: LAYOUT PLUGINS -->
+<script src="assets/plugins/revo-slider/js/jquery.themepunch.tools.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/jquery.themepunch.revolution.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.slideanims.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.layeranimation.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.navigation.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.video.min.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.parallax.min.js" type="text/javascript"></script>
+<script src="assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+<script src="assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+<script src="assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+<script src="assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="assets/plugins/smooth-scroll/jquery.smooth-scroll.js" type="text/javascript"></script>
+<script src="assets/plugins/typed/typed.min.js" type="text/javascript"></script>
+<script src="assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+<script src="assets/plugins/js-cookie/js.cookie.js" type="text/javascript"></script>
+<!-- END: LAYOUT PLUGINS -->
+
+<!-- BEGIN: THEME SCRIPTS -->
+<script src="assets/base/js/components.js" type="text/javascript"></script>
+<script src="assets/base/js/components-shop.js" type="text/javascript"></script>
+<script src="assets/base/js/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        App.init(); // init core
+    });
+</script>
+<!-- END: THEME SCRIPTS -->
+
+<!-- BEGIN: PAGE SCRIPTS -->
+<script src="assets/heos/default/js/scripts/revo-slider/slider-4.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.parallax.min.js" type="text/javascript"></script>
+<script src="assets/heos/default/js/scripts/common/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        App.init(); // init core
+    });
+</script>
+<!-- END: THEME SCRIPTS -->
+
+<!-- BEGIN: PAGE SCRIPTS -->
+<script src="assets/demos/default/js/scripts/revo-slider/slider-4.js" type="text/javascript"></script>
+<script src="assets/plugins/revo-slider/js/extensions/revolution.extension.parallax.min.js" type="text/javascript"></script>
+<script src='assets/plugins/flickity.pkgd.min.js'></script>
+<script src='assets/plugins/vue.js'></script>
+<script src="assets/demos/default/js/hotspot.js"></script>
+<script src="assets/heos/default/js/pageBar.js"></script>
+<script>
+
+
+
+</script>
+<script src="assets/heos/default/js/scripts/common/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+
+        initNavigation(""); // init core
+    });
+</script>
+<script>
+
+</script>
+<!-- END: PAGE SCRIPTS -->
+<!-- END: LAYOUT/BASE/BOTTOM -->
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    <!--二级菜单-->
+    var firstMenus = new Array();
+
+    firstMenus[0] = '生物';
+    firstMenus[1] = '密度';
+    firstMenus[2] = '生物量';
+
+    var secondMenus = new Array();
+    secondMenus[0] = '浮游动物';
+    secondMenus[1] = '轮虫';
+    secondMenus[2] = '密度';
+    secondMenus[3] = '桡足类';
+    secondMenus[4] = '原生动物';
+
+    var thirdMenus = new Array();
+    thirdMenus[0] = '生物量';
+    thirdMenus[1] = '轮虫';
+    thirdMenus[2] = '数据总表';
+    thirdMenus[3] = '桡足类';
+    thirdMenus[4] = '原生动物';
+    thirdMenus[5] = '枝角类';
+
+
+
+    var fourMenus = new Array();
+    fourMenus[0] = '浮游植物';
+    fourMenus[1] = '硅藻门';
+    fourMenus[2] = '甲藻门';
+    fourMenus[3] = '金藻门';
+    fourMenus[4] = '蓝藻门';
+    fourMenus[5] = '裸藻门';
+    fourMenus[6] = '绿藻门';
+    fourMenus[7] = '隐藻门';
+    fourMenus[8] = '生物量';
+    fourMenus[9] = '数据总表';
+
+    var fiveMenus = new Array();
+    fiveMenus[0] = '细胞密度';
+    fiveMenus[1] = '硅藻门';
+    fiveMenus[2] = '甲藻门';
+    fiveMenus[3] = '金藻门';
+    fiveMenus[4] = '蓝藻门';
+    fiveMenus[5] = '裸藻门';
+    fiveMenus[6] = '绿藻门';
+    fiveMenus[7] = '隐藻门';
+
+
+    var sixMenus = new Array();
+    sixMenus[0] = 'archaea';
+    sixMenus[1] = 'bacteria';
+    sixMenus[2] = '数据总表';
+
+    var sevenMenus = new Array();
+    sevenMenus[0] = '底泥';
+
+    var eightMenus = new Array();
+    eightMenus[0] = '磺胺类抗生素的含量';
+    eightMenus[1] = '数据总表';
+    eightMenus[2] = '新型烟碱类农药含量';
+    eightMenus[3] = '有机磷酸酯的含量';
+
+
+
+    var store = {
+        debug: true,
+        state: {
+            //获取的所有记录
+            listShare: [],
+            select: true,
+        },
+
+        setMessageAction (newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue)
+            this.state.listShare = newValue
+        },
+        clearMessageAction () {
+            if (this.debug) console.log('clearMessageAction triggered')
+            this.state.listShare = ''
+        }
+    }
+    //登陆
+    var loginTable=new Vue({
+        el:"#from",
+        data(){
+            return{
+                name:"",
+                pwd:"",
+            }
+        },
+        methods:{
+            //处理登陆
+            dealLogin: function(){
+                _this = this;
+                // confirm(function())
+                var data = {};
+                data.name=this.name;
+                data.pwd=this.pwd;
+                $.ajax({
+                    type: "POST",
+                    url:"table/userTable",
+                    dataType: "json",
+                    data: data,
+                    success: function (result) {
+                        if(result.status == 0){
+                            alert("Your username or password is wrong,please login again.");
+                        }
+                        else {
+                            var toUrl="consultant.html?"+result.status;
+                            window.location.href=toUrl;
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+
+                });
+
+            },
+        }
+    });
+
+</script>
+</body>
+
+</html>

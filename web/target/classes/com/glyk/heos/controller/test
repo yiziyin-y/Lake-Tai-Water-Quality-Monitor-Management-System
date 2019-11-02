@@ -1,0 +1,144 @@
+
+        if(oneMenuIndex == 0){
+
+            if(twoMenuIndex == 1){
+                result = s底栖生物密度Service.get底栖生物密度统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 2){
+                result = s底栖生物生物量Service.get底栖生物生物量统计Info2(place, startDate, endDate);
+            }
+        }
+        if(oneMenuIndex == 1){
+
+            if(twoMenuIndex == 1){
+                result = s水生密度轮虫Service.get水生密度轮虫统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 2){
+                result = s水生密度密度Service.get水生密度密度统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 3){
+                result = s水生密度桡足类Service.get水生密度桡足类统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 2){
+                result = s水生密度原生动物Service.get水生密度原生动物统计Info2(place, startDate, endDate);
+            }
+        }
+        if(oneMenuIndex == 2){
+            if(twoMenuIndex == 0){
+                result = s水生多样性生物量Service.get水生多样性生物量统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 1){
+                result = s水生多样性轮虫Service.get水生多样性轮虫统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 2){
+                result = s水生多样性数据总表Service.get水生多样性数据总表统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 3){
+                result = s水生多样性足类Service.get水生多样性足类统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 4){
+                result = s水生多样性原生动物Service.get水生多样性原生动物统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 5){
+                result = s水生多样性枝角类Service.get水生多样性枝角类统计Info2(place, startDate, endDate);
+            }
+        }
+        if(oneMenuIndex == 3){
+
+            if(twoMenuIndex == 1){
+                result = s水生相关性硅藻门Service.get水生相关性硅藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 2){
+                result = s水生相关性甲藻门Service.get水生相关性甲藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 3){
+                result = s水生相关性金藻门Service.get水生相关性金藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 4){
+                result = s水生相关性蓝藻门Service.get水生相关性蓝藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 5){
+                result = s水生相关性裸藻门Service.get水生相关性裸藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 6){
+                result = s水生相关性绿藻门Service.get水生相关性绿藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 7){
+                result = s水生相关性隐藻门Service.get水生相关性隐藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 8){
+                result = s水生相关性生物量Service.get水生相关性生物量统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 9){
+                result = s水生相关性数据总表Service.get水生相关性数据总表统计Info2(place, startDate, endDate);
+            }
+        }
+
+        if(oneMenuIndex == 4){
+            if(twoMenuIndex == 0){
+                result = s水生细密细胞密度Service.get水生细密细胞密度统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 1){
+                result = s水生细密硅藻门Service.get水生细密硅藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 2){
+                result = s水生细密甲藻门Service.get水生细密甲藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 3){
+                result = s水生细密金藻门Service.get水生细密金藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 4){
+                result = s水生细密蓝藻门Service.get水生细密蓝藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 5){
+                result = s水生细密裸藻门Service.get水生细密裸藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 6){
+                result = s水生细密绿藻门Service.get水生细密绿藻门统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 7){
+                result = s水生细密隐藻门Service.get水生细密隐藻门统计Info2(place, startDate, endDate);
+
+            }
+        }
+
+        if(oneMenuIndex == 5){
+            if(twoMenuIndex == 0){
+                result = s生物群落201809archaeaService.get生物群落201809archaea统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 1){
+                result = s生物群落201809bacteriaService.get生物群落201809bacteria统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 2){
+                result = s生物群落201809数据总表Service.get生物群落201809数据总表统计Info2(place, startDate, endDate);
+
+            }
+        }
+
+
+        if(oneMenuIndex == 6){
+            if(twoMenuIndex == 0){
+                result = s生物群落201809archaeaService.get生物群落201809archaea统计Info2(place, startDate, endDate);
+
+            }
+        }
+
+
+        if(oneMenuIndex == 7){
+            if(twoMenuIndex == 0){
+                result = s水质监测201809磺胺类抗生素的含量Service.get水质监测201809磺胺类抗生素的含量统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 1){
+                result = s水质监测201809数据总表Service.get水质监测201809数据总表统计Info2(place, startDate, endDate);
+            }
+            if(twoMenuIndex == 2){
+                result = s水质监测201809新型烟碱类农药含量Service.get水质监测201809新型烟碱类农药含量统计Info2(place, startDate, endDate);
+
+            }
+            if(twoMenuIndex == 3){
+                result = s水质监测201809有机磷酸酯的含量Service.get水质监测201809有机磷酸酯的含量统计Info2(place, startDate, endDate);
+
+            }
+        }
+
+
